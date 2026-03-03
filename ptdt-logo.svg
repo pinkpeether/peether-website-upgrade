@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28.8 29.04">
+  <defs>
+    <filter id="b" data-name="outer-glow-1" filterUnits="userSpaceOnUse">
+      <feOffset dx="0" dy="0"/>
+      <feGaussianBlur result="c" stdDeviation=".65"/>
+      <feFlood flood-color="#000" flood-opacity=".5"/>
+      <feComposite in2="c" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="d">
+      <rect x="7.34" y="20.11" width="14.01" height="3.67" style="fill: none;"/>
+    </clipPath>
+    <clipPath id="e">
+      <path d="M21.35,21.94c0,1.02-3.14,1.83-7,1.83s-7-.82-7-1.83,3.14-1.83,7-1.83,7,.83,7,1.83" style="fill: none;"/>
+    </clipPath>
+    <radialGradient id="g" cx="446.79" cy="3960.78" fx="446.79" fy="3960.78" r="1.45" gradientTransform="translate(-1565.9 2823.67) scale(3.54 -.71)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#000"/>
+    </radialGradient>
+    <mask id="f" data-name="mask" x="7.34" y="20.11" width="14.01" height="3.66" maskUnits="userSpaceOnUse">
+      <rect x="7.34" y="20.11" width="14.01" height="3.66" style="fill: url(#g);"/>
+    </mask>
+    <radialGradient id="h" cx="446.79" cy="3960.78" fx="446.79" fy="3960.78" r="1.45" gradientTransform="translate(-1565.9 2823.67) scale(3.54 -.71)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#797a7d"/>
+      <stop offset=".22" stop-color="#919295"/>
+      <stop offset=".69" stop-color="#d0d1d2"/>
+      <stop offset="1" stop-color="#fff"/>
+    </radialGradient>
+    <clipPath id="i">
+      <rect x="8.58" y="7.67" width="11.53" height="14.47" style="fill: none;"/>
+    </clipPath>
+  </defs>
+  <circle cx="14.35" cy="14.4" r="12.27" style="fill: #fff; filter: url(#b);"/>
+  <circle cx="14.35" cy="14.4" r="12.27" style="fill: #2ae97b; stroke: #d1d3d4; stroke-miterlimit: 10; stroke-width: .46px;"/>
+  <circle cx="14.35" cy="14.4" r="10.66" style="fill: #020202;"/>
+  <g>
+    <g style="clip-path: url(#d);">
+      <g style="clip-path: url(#e);">
+        <g style="mask: url(#f);">
+          <rect x="7.34" y="20.11" width="14.01" height="3.66" style="fill: url(#h);"/>
+        </g>
+      </g>
+    </g>
+    <path d="M15.14,12.47c-.21-.34,2.18-3.91,4.97-4.8-3.22,.47-5.62,2.79-5.76,2.93,0,0-.02,.01-.02,.01,0,0,.01,0,.02-.01,0,0,.01,0,.02,.01h-.02c.64-.63,.45-.1,0,.85-.45-.95-.64-1.48,0-.86-.14-.15-2.55-2.46-5.76-2.93,2.79,.89,5.18,4.46,4.97,4.8-.57,.94-1.12,2.19-1.21,3.55-.03,.14-.05,.26-.05,.36,0,3.18,2.03,5.76,2.03,5.76,0,0,0,0,.02-.01,0,0,.01,.01,.01,.01,0,0,2.03-2.57,2.03-5.76,0-.1-.01-.22-.04-.36-.09-1.36-.63-2.61-1.21-3.55" style="fill: #fb0b8c;"/>
+    <rect x="8.58" y="7.67" width="11.53" height="14.47" style="fill: none;"/>
+    <path d="M15.75,8.26c0,.77-.62,1.39-1.39,1.39s-1.4-.62-1.4-1.39,.63-1.39,1.4-1.39,1.39,.62,1.39,1.39" style="fill: #fb068c;"/>
+  </g>
+</svg>
