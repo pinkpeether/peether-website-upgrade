@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Privacy Policy - Peether (PTDT)</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --pink: #FF2D92;
+      --pink-glow: rgba(255, 45, 146, 0.6);
+      --pink-soft: rgba(255, 45, 146, 0.15);
+      --green: #00F5A0;
+      --green-glow: rgba(0, 245, 160, 0.6);
+      --green-soft: rgba(0, 245, 160, 0.15);
+      --purple: #BD00FF;
+      --bg-dark: #030014;
+      --bg-card: rgba(15, 10, 40, 0.7);
+      --bg-card-solid: #0f0a28;
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.6);
+      --text-dim: rgba(255, 255, 255, 0.4);
+      --shadow-lg: 0 25px 80px -20px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    /* ============================================ */
+    /* ANIMATED BACKGROUND */
+    /* ============================================ */
+    .bg-container {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .bg-gradient {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(255, 45, 146, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(0, 245, 160, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 30% at 50% 20%, rgba(189, 0, 255, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, #030014 0%, #0a0520 50%, #030014 100%);
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 70%);
+    }
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+
+    .bg-orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 45, 146, 0.3) 0%, transparent 70%);
+      top: -200px;
+      left: -200px;
+      animation-delay: 0s;
+    }
+
+    .bg-orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0, 245, 160, 0.25) 0%, transparent 70%);
+      bottom: -150px;
+      right: -150px;
+      animation-delay: -7s;
+    }
+
+    .bg-orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(189, 0, 255, 0.2) 0%, transparent 70%);
+      top: 40%;
+      left: 60%;
+      animation-delay: -14s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -40px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(40px, 30px) scale(1.02); }
+    }
+
+    .bg-stars {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255, 45, 146, 0.4), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.2), transparent),
+        radial-gradient(2px 2px at 130px 80px, rgba(0, 245, 160, 0.4), transparent),
+        radial-gradient(1px 1px at 160px 30px, rgba(255, 255, 255, 0.3), transparent);
+      background-size: 200px 100px;
+      animation: twinkle 8s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* ============================================ */
+    /* MAIN LAYOUT - FIXED */
+    /* ============================================ */
+    .app-container {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      padding-bottom: 80px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* ============================================ */
+    /* HEADER */
+    /* ============================================ */
+    .header {
+      flex-shrink: 0;
+      text-align: center;
+      padding: 15px 0 20px;
+    }
+
+    .logo-wrapper {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 18px;
+    }
+
+    .logo-glow {
+      position: absolute;
+      inset: -10px;
+      background: linear-gradient(135deg, var(--pink), var(--green));
+      border-radius: 50%;
+      opacity: 0.5;
+      filter: blur(18px);
+      animation: logoGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes logoGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.15); }
+    }
+
+    .logo-img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: contain;
+      z-index: 1;
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .header-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--pink) 0%, #ff6eb8 50%, var(--green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .header-subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================ */
+    /* CONTENT CARD - FIXED HEIGHT WITH SCROLL */
+    /* ============================================ */
+    .content-card {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content-card::before,
+    .content-card::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .content-card::before {
+      top: -1px;
+      left: -1px;
+      border-top: 2px solid var(--pink);
+      border-left: 2px solid var(--pink);
+      border-radius: 24px 0 0 0;
+      opacity: 0.6;
+    }
+
+    .content-card::after {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 2px solid var(--green);
+      border-right: 2px solid var(--green);
+      border-radius: 0 0 24px 0;
+      opacity: 0.6;
+    }
+
+    /* Scrollable Content Area */
+.content-scroll {
+  flex: 1;
+  min-height: 0;
+  padding: 0 40px 0 40px;
+  padding-right: 25px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Inner content wrapper for proper spacing */
+.content-inner {
+  padding: 30px 0;
+}
+
+/* Fade mask at top and bottom edges */
+.content-card::before,
+.content-card::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Top fade overlay */
+.content-fade-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 6px;
+  height: 30px;
+  background: linear-gradient(to bottom, var(--bg-card) 0%, var(--bg-card) 30%, transparent 100%);
+  pointer-events: none;
+  z-index: 5;
+  border-radius: 24px 24px 0 0;
+}
+
+/* Bottom fade overlay */
+.content-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 6px;
+  height: 30px;
+  background: linear-gradient(to top, var(--bg-card) 0%, var(--bg-card) 30%, transparent 100%);
+  pointer-events: none;
+  z-index: 5;
+  border-radius: 0 0 24px 24px;
+}
+
+    /* Custom Pink Scrollbar */
+    .content-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .content-scroll::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+
+    .content-scroll::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--pink), var(--purple));
+      border-radius: 10px;
+    }
+
+    .content-scroll::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #ff4da6, var(--pink));
+    }
+
+    /* Firefox */
+    .content-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: var(--pink) rgba(255, 255, 255, 0.05);
+    }
+
+    /* ============================================ */
+    /* TYPOGRAPHY */
+    /* ============================================ */
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--pink);
+      margin: 40px 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 10px;
+    }
+
+    h2:first-child {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    h2::before {
+      content: '';
+      width: 4px;
+      height: 26px;
+      background: linear-gradient(180deg, var(--pink), var(--purple));
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--green);
+      margin: 26px 0 12px;
+    }
+
+    p {
+      margin-bottom: 16px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+
+    ul, ol {
+      margin: 16px 0 16px 26px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      position: relative;
+    }
+
+    ul li::marker {
+      color: var(--pink);
+    }
+
+    ol li::marker {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    a {
+      color: var(--green);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    a:hover {
+      color: var(--pink);
+      text-shadow: 0 0 10px rgba(255, 45, 146, 0.5);
+    }
+
+    /* ============================================ */
+    /* NOTICE BOX */
+    /* ============================================ */
+    .notice {
+      position: relative;
+      padding: 22px 26px;
+      border-radius: 16px;
+      margin: 26px 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255, 45, 146, 0.1) 0%, rgba(189, 0, 255, 0.05) 100%);
+    }
+
+    .notice::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--pink), var(--purple));
+    }
+
+    .notice p {
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .notice p:last-child {
+      margin-bottom: 0;
+    }
+
+    .notice ul {
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+
+    .notice li {
+      color: var(--text);
+    }
+
+    .notice.warning {
+      background: linear-gradient(135deg, rgba(255, 79, 79, 0.12) 0%, rgba(255, 45, 146, 0.06) 100%);
+    }
+
+    .notice.warning::before {
+      background: linear-gradient(180deg, #ff4f4f, var(--pink));
+    }
+
+    /* ============================================ */
+    /* CONTACT BOX */
+    /* ============================================ */
+    .contact-box {
+      position: relative;
+      padding: 26px 30px;
+      border-radius: 16px;
+      margin: 26px 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(0, 245, 160, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%);
+      border: 1px solid rgba(0, 245, 160, 0.2);
+    }
+
+    .contact-box::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--green), #00d4ff);
+    }
+
+    .contact-box p {
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .contact-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-box ul {
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+
+    .contact-box li {
+      color: var(--text);
+    }
+
+    /* ============================================ */
+    /* END TEXT */
+    /* ============================================ */
+    .end-text {
+      text-align: center;
+      margin-top: 45px;
+      padding-top: 25px;
+      border-top: 1px solid var(--glass-border);
+      color: var(--text-dim);
+      font-size: 0.88rem;
+    }
+
+    /* ============================================ */
+    /* BACK BUTTON - FIXED AT BOTTOM */
+    /* ============================================ */
+    .back-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--pink) 0%, #bd00ff 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 40px rgba(255, 45, 146, 0.4);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    .back-btn:hover {
+      transform: translateX(-50%) translateY(-4px);
+      box-shadow: 0 20px 50px rgba(255, 45, 146, 0.5);
+      color: white;
+      text-shadow: none;
+    }
+
+    .back-btn svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .back-btn:hover svg {
+      transform: translateX(-4px);
+    }
+
+    /* ============================================ */
+    /* RESPONSIVE */
+    /* ============================================ */
+    @media (max-width: 480px) {
+  .content-scroll {
+    padding: 0 16px 0 16px;
+    padding-right: 12px;
+  }
+
+      .header {
+        padding: 10px 0 15px;
+      }
+
+      .logo-wrapper {
+        width: 65px;
+        height: 65px;
+        margin-bottom: 14px;
+      }
+
+      .header-title {
+        font-size: 1.7rem;
+      }
+
+      .header-subtitle {
+        font-size: 0.7rem;
+      }
+
+      .content-card {
+        border-radius: 20px;
+      }
+
+      .content-card::before,
+      .content-card::after {
+        width: 70px;
+        height: 70px;
+      }
+
+      .content-scroll {
+        padding: 30px 22px 30px 22px;
+        padding-right: 15px;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        margin: 32px 0 14px;
+      }
+
+      h2::before {
+        width: 3px;
+        height: 22px;
+      }
+
+      h3 {
+        font-size: 1rem;
+      }
+
+      p, li {
+        font-size: 0.88rem;
+      }
+
+      .notice,
+      .contact-box {
+        padding: 18px 20px;
+      }
+
+      .back-btn {
+        padding: 12px 24px;
+        font-size: 0.85rem;
+        bottom: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .app-container {
+        padding: 12px;
+        padding-bottom: 70px;
+      }
+
+      .header {
+        padding: 8px 0 12px;
+      }
+
+      .logo-wrapper {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 12px;
+      }
+
+      .header-title {
+        font-size: 1.4rem;
+      }
+
+      .header-subtitle {
+        font-size: 0.65rem;
+      }
+
+      .content-card {
+        border-radius: 16px;
+      }
+
+      .content-card::before,
+      .content-card::after {
+        width: 50px;
+        height: 50px;
+      }
+
+      .content-scroll {
+        padding: 25px 16px 25px 16px;
+        padding-right: 12px;
+      }
+
+      .content-scroll::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      h2 {
+        font-size: 1.05rem;
+        gap: 10px;
+      }
+
+      h2::before {
+        height: 18px;
+      }
+
+      p, li {
+        font-size: 0.85rem;
+      }
+
+      ul, ol {
+        margin-left: 20px;
+      }
+
+      .back-btn {
+        padding: 11px 20px;
+        font-size: 0.8rem;
+        bottom: 14px;
+      }
+    }
+
+    /* ============================================ */
+    /* PRINT STYLES */
+    /* ============================================ */
+    @media print {
+      html, body {
+        height: auto;
+        overflow: visible;
+      }
+
+      .bg-container,
+      .back-btn {
+        display: none !important;
+      }
+
+      .app-container {
+        position: static;
+        max-width: 100%;
+        padding: 20px;
+      }
+
+      .content-card {
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: none;
+      }
+
+      .content-card::before,
+      .content-card::after {
+        display: none;
+      }
+
+      .content-scroll {
+        overflow: visible;
+        padding-right: 40px;
+      }
+
+      h2 {
+        color: #d81b60;
+      }
+
+      h3, a {
+        color: #00897b;
+      }
+
+      p, li {
+        color: #333;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-container">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-stars"></div>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-wrapper">
+        <div class="logo-glow"></div>
+        <img src="ptdt-logo.png" alt="PTDT Logo" class="logo-img">
+      </div>
+      <h1 class="header-title">Peether PTDT Privacy</h1>
+      <p class="header-subtitle">Privacy Policy • Effective Date: October 2025</p>
+    </header>
+
+    <!-- Content Card with Fixed Scroll -->
+<div class="content-card">
+  <div class="content-fade-top"></div>
+  <div class="content-scroll">
+    <div class="content-inner">
+
+      <h2>1. Introduction</h2>
+        <p>Pink Taxi Group LTD ("Company," "we," "us," or "our") respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website (https://www.ptdt.taxi), participate in our token sale, or use our services.</p>
+
+        <div class="contact-box">
+          <p><strong>Token Information:</strong></p>
+          <ul>
+            <li><strong>Token Name:</strong> Peether</li>
+            <li><strong>Token Symbol:</strong> PTDT</li>
+            <li><strong>Official Website:</strong> <a href="https://www.ptdt.taxi" target="_blank">https://www.ptdt.taxi</a></li>
+            <li><strong>Contact Email:</strong> <a href="mailto:info@ptdt.taxi">info@ptdt.taxi</a></li>
+            <li><strong>Emergency Email:</strong> <a href="mailto:support@ptdt.taxi">support@ptdt.taxi</a></li>
+          </ul>
+        </div>
+
+        <p>Please read this Privacy Policy carefully. By accessing our website or using our services, you agree to the collection and use of information in accordance with this policy.</p>
+
+        <h2>2. Information We Collect</h2>
+
+        <h3>2.1 Personal Information You Provide</h3>
+        <p>We collect information that you voluntarily provide when you:</p>
+        <ul>
+          <li>Register for the token sale or early access whitelist</li>
+          <li>Subscribe to our newsletter or updates</li>
+          <li>Contact us for support</li>
+          <li>Participate in our community forums or social media</li>
+        </ul>
+
+        <p>This information may include:</p>
+        <ul>
+          <li>Full name</li>
+          <li>Email address</li>
+          <li>Country of residence</li>
+          <li>Wallet address (cryptocurrency wallet)</li>
+          <li>Communication preferences</li>
+          <li>Any other information you choose to provide</li>
+        </ul>
+
+        <h3>2.2 Automatically Collected Information</h3>
+        <p>When you visit our website, we may automatically collect:</p>
+        <ul>
+          <li>IP address</li>
+          <li>Browser type and version</li>
+          <li>Operating system</li>
+          <li>Device information</li>
+          <li>Pages visited and time spent</li>
+          <li>Referring website addresses</li>
+          <li>Cookies and similar tracking technologies</li>
+        </ul>
+
+        <h3>2.3 Blockchain Information</h3>
+        <p>When you interact with PTDT tokens or conduct transactions:</p>
+        <ul>
+          <li>Your wallet address becomes publicly visible on the Binance Smart Chain</li>
+          <li>Transaction details (amounts, timestamps) are recorded on the blockchain</li>
+          <li>This information is publicly accessible and permanent</li>
+        </ul>
+        <p><strong>Note:</strong> Blockchain transactions are pseudonymous but not anonymous. We do not control information stored on public blockchains.</p>
+
+        <h2>3. How We Use Your Information</h2>
+        <p>We use the collected information for the following purposes:</p>
+
+        <h3>3.1 Service Delivery</h3>
+        <ul>
+          <li>Process token purchases and distributions</li>
+          <li>Manage whitelist registrations</li>
+          <li>Provide customer support</li>
+          <li>Send transaction confirmations</li>
+        </ul>
+
+        <h3>3.2 Communication</h3>
+        <ul>
+          <li>Send important updates about PTDT tokens and the Pink Taxi platform</li>
+          <li>Respond to inquiries and support requests</li>
+          <li>Deliver newsletters (if subscribed)</li>
+          <li>Notify you about changes to our services or policies</li>
+        </ul>
+
+        <h3>3.3 Compliance and Security</h3>
+        <ul>
+          <li>Verify identity and eligibility (KYC/AML compliance)</li>
+          <li>Prevent fraud, money laundering, and other illegal activities</li>
+          <li>Detect and prevent security threats</li>
+          <li>Comply with legal obligations and regulatory requirements</li>
+        </ul>
+
+        <h3>3.4 Analytics and Improvement</h3>
+        <ul>
+          <li>Analyze website usage and user behavior</li>
+          <li>Improve our website, services, and user experience</li>
+          <li>Develop new features and services</li>
+          <li>Conduct research and analytics</li>
+        </ul>
+
+        <h3>3.5 Marketing (with consent)</h3>
+        <ul>
+          <li>Send promotional materials about PTDT and Pink Taxi services</li>
+          <li>Inform you about bounty programs and referral opportunities</li>
+          <li>Share updates about token exchange listings</li>
+        </ul>
+        <p>You can opt out of marketing communications at any time.</p>
+
+        <h2>4. How We Share Your Information</h2>
+        <p>We do not sell your personal information. We may share your information in the following circumstances:</p>
+
+        <h3>4.1 Service Providers</h3>
+        <p>We may share information with third-party service providers who assist us with:</p>
+        <ul>
+          <li>Website hosting and maintenance</li>
+          <li>Email delivery services</li>
+          <li>Payment processing</li>
+          <li>Analytics and data analysis</li>
+          <li>Customer support tools</li>
+          <li>Marketing platforms</li>
+        </ul>
+        <p>These providers are contractually obligated to protect your information and use it only for specified purposes.</p>
+
+        <h3>4.2 Legal and Regulatory Compliance</h3>
+        <p>We may disclose information when required by law or to:</p>
+        <ul>
+          <li>Comply with legal processes (subpoenas, court orders)</li>
+          <li>Respond to government requests</li>
+          <li>Enforce our Terms of Service</li>
+          <li>Protect our rights, property, or safety</li>
+          <li>Prevent fraud or illegal activities</li>
+          <li>Comply with KYC/AML regulations</li>
+        </ul>
+
+        <h3>4.3 Business Transfers</h3>
+        <p>If we undergo a merger, acquisition, reorganization, or sale of assets, your information may be transferred to the successor entity.</p>
+
+        <h3>4.4 With Your Consent</h3>
+        <p>We may share information for other purposes with your explicit consent.</p>
+
+        <h3>4.5 Public Blockchain</h3>
+        <p>Your wallet address and transaction history are publicly visible on the Binance Smart Chain and cannot be deleted or made private.</p>
+
+        <h2>5. Cookies and Tracking Technologies</h2>
+
+        <h3>5.1 What Are Cookies?</h3>
+        <p>Cookies are small text files stored on your device that help us provide and improve our services.</p>
+
+        <h3>5.2 Types of Cookies We Use</h3>
+        <p><strong>Essential Cookies:</strong> Required for website functionality (e.g., user authentication, security).</p>
+        <p><strong>Analytics Cookies:</strong> Help us understand how visitors use our website (e.g., Google Analytics).</p>
+        <p><strong>Functional Cookies:</strong> Remember your preferences and settings.</p>
+        <p><strong>Marketing Cookies:</strong> Track your activity for advertising purposes (with consent).</p>
+
+        <h3>5.3 Managing Cookies</h3>
+        <p>You can control cookies through your browser settings. Note that disabling certain cookies may affect website functionality.</p>
+
+        <h3>5.4 Do Not Track Signals</h3>
+        <p>We currently do not respond to "Do Not Track" browser signals.</p>
+
+        <h2>6. Data Security</h2>
+
+        <h3>6.1 Security Measures</h3>
+        <p>We implement reasonable security measures to protect your information, including:</p>
+        <ul>
+          <li>Encryption (SSL/TLS) for data transmission</li>
+          <li>Secure servers and databases</li>
+          <li>Access controls and authentication</li>
+          <li>Regular security audits</li>
+          <li>Employee training on data protection</li>
+        </ul>
+
+        <h3>6.2 Limitations</h3>
+        <p>No method of transmission or storage is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.</p>
+
+        <h3>6.3 Your Responsibility</h3>
+        <p>You are responsible for:</p>
+        <ul>
+          <li>Keeping your wallet private keys secure</li>
+          <li>Using strong passwords</li>
+          <li>Not sharing your account credentials</li>
+          <li>Reporting any security concerns to us immediately</li>
+        </ul>
+
+        <h2>7. Data Retention</h2>
+
+        <h3>7.1 Retention Period</h3>
+        <p>We retain your personal information for as long as necessary to:</p>
+        <ul>
+          <li>Fulfill the purposes outlined in this Privacy Policy</li>
+          <li>Comply with legal, regulatory, and tax obligations</li>
+          <li>Resolve disputes and enforce agreements</li>
+        </ul>
+
+        <h3>7.2 Deletion Requests</h3>
+        <p>You may request deletion of your personal information (subject to legal retention requirements). Blockchain data cannot be deleted.</p>
+
+        <h2>8. Your Privacy Rights</h2>
+        <p>Depending on your jurisdiction, you may have the following rights:</p>
+
+        <h3>8.1 Access and Correction</h3>
+        <ul>
+          <li>Request access to your personal information</li>
+          <li>Request correction of inaccurate information</li>
+        </ul>
+
+        <h3>8.2 Deletion</h3>
+        <ul>
+          <li>Request deletion of your personal information (subject to legal exceptions)</li>
+        </ul>
+
+        <h3>8.3 Data Portability</h3>
+        <ul>
+          <li>Request a copy of your information in a portable format</li>
+        </ul>
+
+        <h3>8.4 Objection and Restriction</h3>
+        <ul>
+          <li>Object to processing of your information</li>
+          <li>Request restriction of processing</li>
+        </ul>
+
+        <h3>8.5 Withdraw Consent</h3>
+        <ul>
+          <li>Withdraw consent for marketing communications or optional data processing</li>
+        </ul>
+
+        <h3>8.6 Complaint</h3>
+        <ul>
+          <li>Lodge a complaint with your local data protection authority</li>
+        </ul>
+
+        <p>To exercise your rights, contact us at <a href="mailto:support@ptdt.taxi">support@ptdt.taxi</a></p>
+        <p><strong>Note:</strong> Some rights may not apply depending on your jurisdiction and our legal obligations.</p>
+
+        <h2>9. International Data Transfers</h2>
+
+        <h3>9.1 Global Operations</h3>
+        <p>Our operations may involve transferring your information to countries outside your residence, including the United Kingdom and other jurisdictions.</p>
+
+        <h3>9.2 Data Protection</h3>
+        <p>We ensure appropriate safeguards are in place when transferring data internationally, including:</p>
+        <ul>
+          <li>Standard contractual clauses</li>
+          <li>Adequacy decisions by relevant authorities</li>
+          <li>Your explicit consent</li>
+        </ul>
+
+        <h3>9.3 EEA/UK Residents</h3>
+        <p>If you are in the European Economic Area (EEA) or United Kingdom, we comply with GDPR requirements for international data transfers.</p>
+
+        <h2>10. Children's Privacy</h2>
+
+        <h3>10.1 Age Restriction</h3>
+        <p>Our services are not intended for individuals under 18 years of age. We do not knowingly collect information from children.</p>
+
+        <h3>10.2 Parental Notice</h3>
+        <p>If you believe we have collected information from a child, please contact us immediately at <a href="mailto:support@ptdt.taxi">support@ptdt.taxi</a>, and we will delete such information.</p>
+
+        <h2>11. Third-Party Links</h2>
+
+        <h3>11.1 External Websites</h3>
+        <p>Our website may contain links to third-party websites, including:</p>
+        <ul>
+          <li>Social media platforms (Twitter, Facebook, Telegram)</li>
+          <li>Exchange platforms</li>
+          <li>Partner services</li>
+        </ul>
+
+        <h3>11.2 No Responsibility</h3>
+        <p>We are not responsible for the privacy practices of third-party websites. We encourage you to review their privacy policies.</p>
+
+        <h2>12. Changes to This Privacy Policy</h2>
+
+        <h3>12.1 Updates</h3>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, or legal requirements.</p>
+
+        <h3>12.2 Notification</h3>
+        <p>We will notify you of material changes by:</p>
+        <ul>
+          <li>Posting the updated policy on our website with a new "Effective Date"</li>
+          <li>Sending an email notification (if you provided an email address)</li>
+          <li>Displaying a prominent notice on our website</li>
+        </ul>
+
+        <h3>12.3 Continued Use</h3>
+        <p>Your continued use of our services after changes constitutes acceptance of the updated Privacy Policy.</p>
+
+        <h2>13. Specific Jurisdictions</h2>
+
+        <h3>13.1 European Economic Area (EEA) and United Kingdom</h3>
+        <p><strong>Legal Basis for Processing:</strong></p>
+        <p>We process your information based on:</p>
+        <ul>
+          <li>Consent (e.g., marketing communications)</li>
+          <li>Contractual necessity (e.g., token sale transactions)</li>
+          <li>Legal obligations (e.g., KYC/AML compliance)</li>
+          <li>Legitimate interests (e.g., fraud prevention, analytics)</li>
+        </ul>
+        <p><strong>Data Controller:</strong> Pink Taxi Group LTD is the data controller for your information.</p>
+        <p><strong>Rights:</strong> EEA/UK residents have additional rights under GDPR, including the right to lodge complaints with supervisory authorities.</p>
+
+        <h3>13.2 California Residents (CCPA)</h3>
+        <p>California residents have specific rights under the California Consumer Privacy Act (CCPA):</p>
+        <p><strong>Right to Know:</strong> Request disclosure of collected information, sources, purposes, and third-party sharing.</p>
+        <p><strong>Right to Delete:</strong> Request deletion of personal information (subject to exceptions).</p>
+        <p><strong>Right to Opt-Out:</strong> Opt out of the "sale" of personal information (we do not sell personal information).</p>
+        <p><strong>Non-Discrimination:</strong> We will not discriminate against you for exercising your rights.</p>
+        <p>To exercise CCPA rights, contact us at <a href="mailto:support@ptdt.taxi">support@ptdt.taxi</a></p>
+
+        <h3>13.3 Other Jurisdictions</h3>
+        <p>If you are in another jurisdiction with specific data protection laws, we will comply with applicable requirements.</p>
+
+        <h2>14. Contact Us</h2>
+        <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact:</p>
+
+        <div class="contact-box">
+          <p><strong>Pink Taxi Group LTD</strong></p>
+          <p>Email: <a href="mailto:info@ptdt.taxi">info@ptdt.taxi</a></p>
+          <p>Help: <a href="mailto:support@ptdt.taxi">support@ptdt.taxi</a></p>
+          <p>Website: <a href="https://www.ptdt.taxi" target="_blank">https://www.ptdt.taxi</a></p>
+        </div>
+
+        <h2>15. Consent and Acknowledgment</h2>
+        <p>By using our website and services, you acknowledge that:</p>
+        <p><strong>15.1.</strong> You have read and understood this Privacy Policy.</p>
+        <p><strong>15.2.</strong> You consent to the collection, use, and disclosure of your information as described.</p>
+        <p><strong>15.3.</strong> You understand that blockchain transactions are public and permanent.</p>
+        <p><strong>15.4.</strong> You are responsible for the security of your wallet and private keys.</p>
+
+        <div class="notice">
+          <p><strong>⚠️ IMPORTANT REMINDERS:</strong></p>
+          <ul>
+            <li><strong>Blockchain Transparency:</strong> Your wallet address and transactions are publicly visible on the Binance Smart Chain.</li>
+            <li><strong>Security:</strong> Never share your private keys or seed phrases with anyone, including our team.</li>
+            <li><strong>Scam Awareness:</strong> We will never ask for your private keys. Beware of phishing attempts.</li>
+            <li><strong>Updates:</strong> Check this Privacy Policy periodically for updates.</li>
+          </ul>
+        </div>
+
+        <p class="end-text">
+        <strong>End of Privacy Policy</strong><br>
+        Last Updated: October 2025
+      </p>
+
+    </div>
+  </div>
+  <div class="content-fade-bottom"></div>
+</div>
+
+  <!-- Back Button -->
+  <a href="/" class="back-btn">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+    </svg>
+    Back to Peether PTDT Homepage
+  </a>
+</body>
+</html>

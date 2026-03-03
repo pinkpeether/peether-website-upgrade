@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>White Paper — PTDT | Peether</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --pink: #FF2D92;
+      --pink-glow: rgba(255, 45, 146, 0.6);
+      --pink-soft: rgba(255, 45, 146, 0.15);
+      --green: #00F5A0;
+      --green-glow: rgba(0, 245, 160, 0.6);
+      --green-soft: rgba(0, 245, 160, 0.15);
+      --purple: #BD00FF;
+      --bg-dark: #030014;
+      --bg-card: rgba(15, 10, 40, 0.7);
+      --bg-card-solid: #0f0a28;
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.6);
+      --text-dim: rgba(255, 255, 255, 0.4);
+      --shadow-lg: 0 25px 80px -20px rgba(0, 0, 0, 0.5);
+      --shadow-glow-pink: 0 0 60px rgba(255, 45, 146, 0.3);
+      --shadow-glow-green: 0 0 60px rgba(0, 245, 160, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    /* ============================================ */
+    /* ANIMATED BACKGROUND */
+    /* ============================================ */
+    .bg-container {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-gradient {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(255, 45, 146, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(0, 245, 160, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 30% at 50% 20%, rgba(189, 0, 255, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, #030014 0%, #0a0520 50%, #030014 100%);
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 70%);
+    }
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+
+    .bg-orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 45, 146, 0.3) 0%, transparent 70%);
+      top: -200px;
+      left: -200px;
+      animation-delay: 0s;
+    }
+
+    .bg-orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0, 245, 160, 0.25) 0%, transparent 70%);
+      bottom: -150px;
+      right: -150px;
+      animation-delay: -7s;
+    }
+
+    .bg-orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(189, 0, 255, 0.2) 0%, transparent 70%);
+      top: 40%;
+      left: 60%;
+      animation-delay: -14s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -40px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(40px, 30px) scale(1.02); }
+    }
+
+    /* Stars/Particles */
+    .bg-stars {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255, 45, 146, 0.4), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.2), transparent),
+        radial-gradient(2px 2px at 130px 80px, rgba(0, 245, 160, 0.4), transparent),
+        radial-gradient(1px 1px at 160px 30px, rgba(255, 255, 255, 0.3), transparent);
+      background-size: 200px 100px;
+      animation: twinkle 8s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* ============================================ */
+    /* MAIN LAYOUT */
+    /* ============================================ */
+    .app-container {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      padding-bottom: 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ============================================ */
+    /* HEADER */
+    /* ============================================ */
+    .header {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-wrapper {
+      position: relative;
+      width: 48px;
+      height: 48px;
+    }
+
+    .logo-glow {
+      position: absolute;
+      inset: -4px;
+      background: linear-gradient(135deg, var(--pink), var(--green));
+      border-radius: 14px;
+      opacity: 0.6;
+      filter: blur(10px);
+      animation: logoGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes logoGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.1); }
+    }
+
+    .logo-img {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      object-fit: contain;
+      z-index: 1;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-subtitle {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 500;
+    }
+
+    /* ============================================ */
+    /* NAVIGATION CONTROLS */
+    /* ============================================ */
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 12px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--pink-soft), var(--green-soft));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-btn:hover::before {
+      opacity: 1;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--pink);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 45, 146, 0.25);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .nav-btn:disabled:hover {
+      border-color: var(--glass-border);
+      box-shadow: none;
+    }
+
+    .nav-btn:disabled::before {
+      opacity: 0;
+    }
+
+    .nav-btn svg {
+      width: 20px;
+      height: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Progress Indicator */
+    .progress-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      min-width: 140px;
+    }
+
+    .progress-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), var(--green));
+      border-radius: 10px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--green), 0 0 20px var(--green);
+    }
+
+    /* Page Jump Dropdown */
+    .page-select {
+      padding: 10px 36px 10px 14px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23FF2D92' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      transition: all 0.3s ease;
+    }
+
+    .page-select:hover {
+      border-color: var(--pink);
+      box-shadow: 0 0 20px rgba(255, 45, 146, 0.2);
+    }
+
+    .page-select:focus {
+      outline: none;
+      border-color: var(--pink);
+    }
+
+    .page-select option {
+      background: var(--bg-card-solid);
+      color: var(--text);
+      padding: 10px;
+    }
+
+    /* ============================================ */
+    /* MAIN CONTENT AREA */
+    /* ============================================ */
+    .content-wrapper {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Decorative corner accents */
+    .content-wrapper::before,
+    .content-wrapper::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .content-wrapper::before {
+      top: -1px;
+      left: -1px;
+      border-top: 2px solid var(--pink);
+      border-left: 2px solid var(--pink);
+      border-radius: 24px 0 0 0;
+      opacity: 0.6;
+    }
+
+    .content-wrapper::after {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 2px solid var(--green);
+      border-right: 2px solid var(--green);
+      border-radius: 0 0 24px 0;
+      opacity: 0.6;
+    }
+
+    /* ============================================ */
+    /* PAGES */
+    /* ============================================ */
+    .page {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(30px);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .page.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .page.exit-left {
+      transform: translateX(-30px);
+    }
+
+    /* Page Header */
+    .page-header {
+      flex-shrink: 0;
+      padding: 28px 32px 20px;
+      border-bottom: 1px solid var(--glass-border);
+      position: relative;
+    }
+
+    .page-number {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--pink);
+      margin-bottom: 10px;
+    }
+
+    .page-number::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--pink), transparent);
+    }
+
+    .page-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff 30%, var(--text-muted) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .page-title .highlight-pink {
+      background: linear-gradient(135deg, var(--pink), #ff6eb8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-title .highlight-green {
+      background: linear-gradient(135deg, var(--green), #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Page Body - Scrollable */
+    .page-body {
+      flex: 1;
+      min-height: 0;
+      padding: 28px 32px;
+      padding-right: 20px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    .page-body::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .page-body::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+
+    .page-body::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--pink), var(--purple));
+      border-radius: 10px;
+    }
+
+    .page-body::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #ff4da6, var(--pink));
+    }
+
+    /* Firefox */
+    .page-body {
+      scrollbar-width: thin;
+      scrollbar-color: var(--pink) rgba(255, 255, 255, 0.05);
+    }
+
+    /* ============================================ */
+    /* TYPOGRAPHY */
+    /* ============================================ */
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--green);
+      margin: 32px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h2::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: linear-gradient(180deg, var(--green), transparent);
+      border-radius: 4px;
+    }
+
+    h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 24px 0 12px;
+    }
+
+    p {
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    ul, ol {
+      margin: 16px 0 16px 24px;
+    }
+
+    li {
+      margin-bottom: 12px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      position: relative;
+    }
+
+    ul li::marker {
+      color: var(--pink);
+    }
+
+    strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+/* ============================================ */
+/* TITLE PAGE SPECIAL */
+/* ============================================ */
+.title-page .page-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.hero-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  padding: 30px 30px 40px;
+  position: relative;
+  background: 
+    radial-gradient(ellipse 60% 40% at 50% 30%, rgba(255, 45, 146, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 70%, rgba(0, 245, 160, 0.08) 0%, transparent 60%);
+}
+
+.hero-top-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, rgba(255, 45, 146, 0.15) 0%, rgba(189, 0, 255, 0.1) 100%);
+  border: 1px solid rgba(255, 45, 146, 0.3);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--pink);
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(255, 45, 146, 0.2);
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--pink);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--pink);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero-logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.hero-logo::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle, rgba(255, 45, 146, 0.4) 0%, transparent 70%);
+  filter: blur(20px);
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+.hero-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.hero-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 3.2rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, var(--pink) 0%, #ff6eb8 50%, var(--green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.0em;
+  margin-bottom: 0px;
+  text-shadow: 0 0 60px rgba(255, 45, 146, 0.5);
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+}
+
+/* Token Grid - Fixed at bottom */
+.token-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  width: 100%;
+  max-width: 700px;
+  flex-shrink: 0;
+}
+
+.token-card {
+  position: relative;
+  padding: 16px 12px;
+  border-radius: 16px;
+  text-align: center;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+}
+
+.token-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.token-card.pink {
+  background: linear-gradient(135deg, rgba(255, 45, 146, 0.2) 0%, rgba(189, 0, 255, 0.15) 100%);
+}
+
+.token-card.green {
+  background: linear-gradient(135deg, rgba(0, 245, 160, 0.2) 0%, rgba(0, 212, 255, 0.15) 100%);
+}
+
+.token-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.token-card.pink:hover {
+  box-shadow: 0 15px 40px rgba(255, 45, 146, 0.3);
+}
+
+.token-card.green:hover {
+  box-shadow: 0 15px 40px rgba(0, 245, 160, 0.3);
+}
+
+.token-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.token-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.token-card.pink .token-value {
+  background: linear-gradient(135deg, var(--pink), #ff6eb8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.token-card.green .token-value {
+  background: linear-gradient(135deg, var(--green), #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shimmer effect */
+.shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 60%
+  );
+  animation: shimmer 4s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-150%); }
+  100% { transform: translateX(150%); }
+}
+
+    /* ============================================ */
+    /* TABLE OF CONTENTS */
+    /* ============================================ */
+    .toc-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .toc-item {
+      margin-bottom: 12px;
+    }
+
+    .toc-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .toc-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--pink), var(--green));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .toc-link:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 45, 146, 0.3);
+      transform: translateX(8px);
+    }
+
+    .toc-link:hover::before {
+      opacity: 1;
+    }
+
+    .toc-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .toc-page {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--green);
+    }
+
+    .toc-page svg {
+      width: 16px;
+      height: 16px;
+      opacity: 0;
+      transform: translateX(-5px);
+      transition: all 0.3s ease;
+    }
+
+    .toc-link:hover .toc-page svg {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ============================================ */
+    /* TABLES */
+    /* ============================================ */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    th, td {
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    th {
+      background: rgba(255, 45, 146, 0.1);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      color: var(--pink);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    td {
+      color: var(--text-muted);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* ============================================ */
+    /* CALLOUT BOXES */
+    /* ============================================ */
+    .callout {
+      padding: 20px 24px;
+      border-radius: 16px;
+      margin: 20px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .callout::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+    }
+
+    .callout.pink {
+      background: linear-gradient(135deg, rgba(255, 45, 146, 0.1) 0%, rgba(189, 0, 255, 0.05) 100%);
+    }
+
+    .callout.pink::before {
+      background: linear-gradient(180deg, var(--pink), var(--purple));
+    }
+
+    .callout.green {
+      background: linear-gradient(135deg, rgba(0, 245, 160, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%);
+    }
+
+    .callout.green::before {
+      background: linear-gradient(180deg, var(--green), #00d4ff);
+    }
+
+    .callout.warning {
+      background: linear-gradient(135deg, rgba(255, 79, 79, 0.1) 0%, rgba(255, 45, 146, 0.05) 100%);
+    }
+
+    .callout.warning::before {
+      background: linear-gradient(180deg, #ff4f4f, var(--pink));
+    }
+
+    .callout p {
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ============================================ */
+    /* BACK BUTTON */
+    /* ============================================ */
+    .back-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--pink) 0%, #bd00ff 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 40px rgba(255, 45, 146, 0.4);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    .back-btn:hover {
+      transform: translateX(-50%) translateY(-4px);
+      box-shadow: 0 20px 50px rgba(255, 45, 146, 0.5);
+    }
+
+    .back-btn svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .back-btn:hover svg {
+      transform: translateX(-4px);
+    }
+
+    /* ============================================ */
+    /* RESPONSIVE */
+    /* ============================================ */
+@media (max-width: 900px) {
+  .hero-section {
+    padding: 25px 25px 35px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+  }
+
+  .token-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-section {
+    padding: 20px 20px 30px;
+  }
+
+  .hero-badge {
+    padding: 8px 14px;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-badge::before {
+    width: 6px;
+    height: 6px;
+  }
+
+.hero-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 16px;
+}
+
+.hero-logo img {
+  border-radius: 50%;
+}
+
+  .hero-title {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+  }
+
+  .hero-top-content {
+    padding-bottom: 15px;
+  }
+
+  .token-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .token-card {
+    padding: 14px 10px;
+  }
+
+  .token-label {
+    font-size: 0.6rem;
+  }
+
+  .token-value {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 1.7rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+  }
+
+  .token-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+    @media (max-width: 600px) {
+      .app-container {
+        padding: 10px;
+        padding-bottom: 70px;
+      }
+
+      .header {
+        padding: 10px 14px;
+        margin-bottom: 12px;
+      }
+
+      .logo-wrapper {
+        width: 40px;
+        height: 40px;
+      }
+
+      .logo-img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .brand-title {
+        font-size: 0.95rem;
+      }
+
+      .brand-subtitle {
+        font-size: 0.6rem;
+      }
+
+      .nav-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .nav-btn svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .progress-wrapper {
+        min-width: 80px;
+      }
+
+      .progress-label {
+        font-size: 0.65rem;
+      }
+
+      .page-select {
+        padding: 8px 30px 8px 12px;
+        font-size: 0.7rem;
+        max-width: 100px;
+      }
+
+      .content-wrapper {
+        border-radius: 16px;
+      }
+
+      .content-wrapper::before,
+      .content-wrapper::after {
+        width: 60px;
+        height: 60px;
+      }
+
+      .page-header {
+        padding: 16px 20px 12px;
+      }
+
+      .page-number {
+        font-size: 0.6rem;
+      }
+
+      .page-title {
+        font-size: 1.2rem;
+      }
+
+      .page-body {
+        padding: 16px 20px;
+        padding-right: 12px;
+      }
+
+      h2 {
+        font-size: 1.1rem;
+        margin: 24px 0 12px;
+      }
+
+      h2::before {
+        width: 3px;
+        height: 20px;
+      }
+
+      p, li {
+        font-size: 0.88rem;
+      }
+
+      .hero-section {
+        padding: 18px 20px 30px;
+      }
+
+      .hero-badge {
+        padding: 8px 14px;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+      }
+
+      .hero-badge::before {
+        width: 6px;
+        height: 6px;
+      }
+
+      .hero-logo {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 16px;
+      }
+
+      .hero-logo img {
+        border-radius: 14px;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+        margin-bottom: 6px;
+      }
+
+      .hero-subtitle {
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        margin-bottom: 22px;
+      }
+
+      .token-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+
+      .token-card {
+        padding: 14px 10px;
+      }
+
+      .token-label {
+        font-size: 0.6rem;
+      }
+
+      .token-value {
+        font-size: 0.95rem;
+      }
+
+      .toc-link {
+        padding: 14px 18px;
+      }
+
+      .toc-text {
+        font-size: 0.88rem;
+      }
+
+      th, td {
+        padding: 10px 14px;
+        font-size: 0.8rem;
+      }
+
+      .callout {
+        padding: 16px 18px;
+      }
+
+      .back-btn {
+        padding: 12px 20px;
+        font-size: 0.8rem;
+        bottom: 16px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .token-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-title {
+        font-size: 1.7rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+      }
+
+      .back-btn {
+        padding: 10px 16px;
+        font-size: 0.75rem;
+      }
+    }
+
+    /* ============================================ */
+    /* PRINT STYLES */
+    /* ============================================ */
+    @media print {
+      html, body {
+        height: auto;
+        overflow: visible;
+      }
+
+      .bg-container,
+      .header,
+      .back-btn {
+        display: none !important;
+      }
+
+      .app-container {
+        position: static;
+        padding: 0;
+        max-width: 100%;
+      }
+
+      .content-wrapper {
+        border: none;
+        box-shadow: none;
+        background: white;
+      }
+
+      .page {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-container">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-stars"></div>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-brand">
+        <div class="logo-wrapper">
+          <div class="logo-glow"></div>
+          <img src="ptdt-logo.png" alt="PTDT" class="logo-img">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Peether PTDT Token</span>
+          <span class="brand-subtitle">Official White Paper</span>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="changePage(-1)" aria-label="Previous page">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+
+        <div class="progress-wrapper">
+          <span class="progress-label" id="pageLabel">Page 1 of 8</span>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <select class="page-select" id="pageJump" onchange="jumpToPage(this.value)">
+          <option value="1">1. Title</option>
+          <option value="2">2. Contents</option>
+          <option value="3">3. Why Pink?</option>
+          <option value="4">4. Benefits</option>
+          <option value="5">5. Token</option>
+          <option value="6">6. Proceeds</option>
+          <option value="7">7. Roadmap</option>
+          <option value="8">8. Disclaimer</option>
+        </select>
+
+        <button class="nav-btn" id="nextBtn" onclick="changePage(1)" aria-label="Next page">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="content-wrapper">
+      <!-- Page 1: Title -->
+<article class="page active title-page" id="page1">
+  <div class="page-body">
+    <div class="hero-section">
+      <!-- Top Content - Centered in remaining space -->
+      <div class="hero-top-content">
+        <div class="hero-badge">
+          <span>The Shadow Protocol</span>
+        </div>
+
+        <div class="hero-logo">
+          <img src="ptdt-logo.png" alt="PTDT Logo">
+        </div>
+
+        <h1 class="hero-title">Peether PTDT</h1>
+        <p class="hero-subtitle">White Paper</p>
+      </div>
+
+      <!-- Token Grid - Fixed at bottom -->
+      <div class="token-grid">
+        <div class="token-card pink">
+          <div class="shimmer"></div>
+          <div class="token-label">Name</div>
+          <div class="token-value">Peether</div>
+        </div>
+
+        <div class="token-card green">
+          <div class="shimmer"></div>
+          <div class="token-label">Symbol</div>
+          <div class="token-value">PTDT</div>
+        </div>
+
+        <div class="token-card pink">
+          <div class="shimmer"></div>
+          <div class="token-label">Total Supply</div>
+          <div class="token-value">100,000</div>
+        </div>
+
+        <div class="token-card green">
+          <div class="shimmer"></div>
+          <div class="token-label">Network</div>
+          <div class="token-value">BSC</div>
+        </div>
+
+        <div class="token-card pink">
+          <div class="shimmer"></div>
+          <div class="token-label">Standard</div>
+          <div class="token-value">BEP-20</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+      <!-- Page 2: Table of Contents -->
+      <article class="page" id="page2">
+        <div class="page-header">
+          <div class="page-number">Page 02</div>
+          <h1 class="page-title">Table of Contents</h1>
+        </div>
+        <div class="page-body">
+          <ul class="toc-list">
+            <li class="toc-item">
+              <a href="#" class="toc-link" onclick="goToPage(3); return false;">
+                <span class="toc-text">Why the need for Pink Taxi?</span>
+                <span class="toc-page">
+                  Page 3
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
+            <li class="toc-item">
+              <a href="#" class="toc-link" onclick="goToPage(4); return false;">
+                <span class="toc-text">Advantages & Benefits</span>
+                <span class="toc-page">
+                  Page 4
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
+            <li class="toc-item">
+              <a href="#" class="toc-link" onclick="goToPage(5); return false;">
+                <span class="toc-text">Token Model</span>
+                <span class="toc-page">
+                  Page 5
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
+            <li class="toc-item">
+              <a href="#" class="toc-link" onclick="goToPage(6); return false;">
+                <span class="toc-text">Token Sales Proceeds</span>
+                <span class="toc-page">
+                  Page 6
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
+            <li class="toc-item">
+              <a href="#" class="toc-link" onclick="goToPage(7); return false;">
+                <span class="toc-text">Roadmap</span>
+                <span class="toc-page">
+                  Page 7
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
+            <li class="toc-item">
+              <a href="#" class="toc-link" onclick="goToPage(8); return false;">
+                <span class="toc-text">Disclaimer</span>
+                <span class="toc-page">
+                  Page 8
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Page 3: Why Pink Taxi -->
+      <article class="page" id="page3">
+        <div class="page-header">
+          <div class="page-number">Page 03</div>
+          <h1 class="page-title">Why the need for <span class="highlight-pink">Pink Taxi</span>?</h1>
+        </div>
+        <div class="page-body">
+          <p>The need for Pink Taxi originates from ongoing violence, attacks, kidnappings, and assaults on women and girls of all ages taking public transport — and is not limited to a single country or region.</p>
+          <p>The major challenges women and girls face traveling daily to work, school, or places of worship include:</p>
+
+          <h2>Harassment & Assault</h2>
+          <ul>
+            <li><strong>Physical assaults:</strong> Groping, touching, or other unwanted physical contact.</li>
+            <li><strong>Verbal harassment:</strong> Catcalling, offensive comments, or threats.</li>
+            <li><strong>Sexual assault:</strong> Incidents range from harassment to serious crimes like rape.</li>
+          </ul>
+
+          <h2>Kidnapping & Disappearances</h2>
+          <ul>
+            <li><strong>Targeted kidnappings:</strong> Women and girls are sometimes targeted for abduction during commutes.</li>
+            <li><strong>Human trafficking:</strong> Public transport areas can be hotspots for traffickers seeking vulnerable individuals.</li>
+          </ul>
+
+          <h2>Inadequate Security & Policing</h2>
+          <ul>
+            <li><strong>Lack of surveillance:</strong> Many transport systems lack adequate CCTV or security personnel.</li>
+            <li><strong>Poor lighting:</strong> Dimly lit stations and stops increase vulnerability.</li>
+            <li><strong>Insufficient law enforcement presence:</strong> A lack of police or security can embolden offenders.</li>
+          </ul>
+
+          <h2>Social Stigma & Victim Blaming</h2>
+          <ul>
+            <li><strong>Underreporting:</strong> Fear of stigma, shame, or disbelief prevents many victims from reporting incidents.</li>
+            <li><strong>Cultural barriers:</strong> In some societies, women are blamed for assaults based on their clothing or behavior.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Page 4: Advantages & Benefits -->
+      <article class="page" id="page4">
+        <div class="page-header">
+          <div class="page-number">Page 04</div>
+          <h1 class="page-title">Advantages & <span class="highlight-green">Benefits</span></h1>
+        </div>
+        <div class="page-body">
+          <h2>Enhanced Safety & Security</h2>
+          <ul>
+            <li><strong>Dedicated service:</strong> Exclusively for women and girls, reducing exposure to harassment and assault.</li>
+            <li><strong>Female drivers:</strong> Employing women drivers creates a comfortable environment.</li>
+            <li><strong>Vetted personnel:</strong> Rigorous background checks ensure trustworthy drivers.</li>
+            <li><strong>In-app safety features:</strong> Emergency buttons, real-time tracking, and trip-sharing capabilities.</li>
+          </ul>
+
+          <h2>Empowerment & Economic Opportunities</h2>
+          <ul>
+            <li><strong>Employment for women:</strong> Creates jobs for women drivers, promoting financial independence.</li>
+            <li><strong>Breaking stereotypes:</strong> Challenges gender norms by placing women in traditionally male-dominated roles.</li>
+            <li><strong>Skill development:</strong> Offers training programs in driving, customer service, and business management.</li>
+          </ul>
+
+          <h2>Convenience & Accessibility</h2>
+          <ul>
+            <li><strong>Reliable service:</strong> On-demand transport tailored to women's schedules and needs.</li>
+            <li><strong>Family-friendly options:</strong> Accommodates mothers traveling with children or elderly relatives.</li>
+            <li><strong>Flexible payment methods:</strong> Supports cash, card, and cryptocurrency payments.</li>
+          </ul>
+
+          <h2>Community Building & Support</h2>
+          <ul>
+            <li><strong>Safe spaces:</strong> Fosters a sense of community among female passengers and drivers.</li>
+            <li><strong>Networking opportunities:</strong> Connects women from various backgrounds, encouraging collaboration.</li>
+            <li><strong>Awareness campaigns:</strong> Promotes gender equality and women's rights through partnerships.</li>
+          </ul>
+
+          <h2>Social Impact & Change</h2>
+          <ul>
+            <li><strong>Reducing gender-based violence:</strong> Addresses systemic issues contributing to violence.</li>
+            <li><strong>Advocacy & policy influence:</strong> Collaborates with authorities to improve public transport safety.</li>
+            <li><strong>Educational initiatives:</strong> Partners with schools and organizations to educate on safety and rights.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Page 5: Token Model -->
+      <article class="page" id="page5">
+        <div class="page-header">
+          <div class="page-number">Page 05</div>
+          <h1 class="page-title">Token <span class="highlight-pink">Model</span></h1>
+        </div>
+        <div class="page-body">
+          <div class="callout green">
+            <p><strong>Total Supply:</strong> 100,000 PTDT (One Hundred Thousand Tokens)</p>
+          </div>
+
+          <h2>Token Allocation</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Allocation</th>
+                  <th>Tokens</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Public Sale</strong></td>
+                  <td>40%</td>
+                  <td>40,000</td>
+                  <td>Available to early supporters and investors</td>
+                </tr>
+                <tr>
+                  <td><strong>Platform Development</strong></td>
+                  <td>25%</td>
+                  <td>25,000</td>
+                  <td>App development, infrastructure, technology</td>
+                </tr>
+                <tr>
+                  <td><strong>Marketing & Partnerships</strong></td>
+                  <td>15%</td>
+                  <td>15,000</td>
+                  <td>Global marketing campaigns, strategic partnerships</td>
+                </tr>
+                <tr>
+                  <td><strong>Team & Advisors</strong></td>
+                  <td>10%</td>
+                  <td>10,000</td>
+                  <td>Core team compensation (vested over 2 years)</td>
+                </tr>
+                <tr>
+                  <td><strong>Community Rewards</strong></td>
+                  <td>5%</td>
+                  <td>5,000</td>
+                  <td>Loyalty programs, referral bonuses, airdrops</td>
+                </tr>
+                <tr>
+                  <td><strong>Reserve Fund</strong></td>
+                  <td>5%</td>
+                  <td>5,000</td>
+                  <td>Emergency fund, future expansion</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Token Utility</h2>
+          <ul>
+            <li><strong>Payment for rides:</strong> Use PTDT to pay for Pink Taxi services</li>
+            <li><strong>Discounts & rewards:</strong> Token holders receive exclusive discounts</li>
+            <li><strong>Staking:</strong> Earn rewards by staking tokens</li>
+            <li><strong>Governance:</strong> Vote on platform decisions and feature updates</li>
+            <li><strong>Driver incentives:</strong> Drivers earn PTDT bonuses for excellent service</li>
+          </ul>
+
+          <div class="callout pink">
+            <p><strong>Token sale price:</strong> TBA (To Be Announced)</p>
+            <p><strong>Minimum purchase:</strong> TBA</p>
+            <p><strong>Maximum purchase:</strong> TBA</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Page 6: Token Sales Proceeds -->
+      <article class="page" id="page6">
+        <div class="page-header">
+          <div class="page-number">Page 06</div>
+          <h1 class="page-title">Token Sales <span class="highlight-green">Proceeds</span></h1>
+        </div>
+        <div class="page-body">
+          <p>The funds raised through the PTDT token sale will be strategically allocated to ensure the successful launch and sustainable growth of the Pink Taxi platform.</p>
+
+          <h2>Allocation Breakdown</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>%</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Platform Development</strong></td>
+                  <td>35%</td>
+                  <td>Mobile app development, backend infrastructure, payment gateway, security systems</td>
+                </tr>
+                <tr>
+                  <td><strong>Operations & Expansion</strong></td>
+                  <td>25%</td>
+                  <td>Launch operations in pilot cities, fleet acquisition, driver recruitment & training</td>
+                </tr>
+                <tr>
+                  <td><strong>Marketing & Branding</strong></td>
+                  <td>20%</td>
+                  <td>Global marketing campaigns, social media, influencer partnerships, community building</td>
+                </tr>
+                <tr>
+                  <td><strong>Legal & Compliance</strong></td>
+                  <td>10%</td>
+                  <td>Regulatory compliance, legal counsel, licensing, insurance</td>
+                </tr>
+                <tr>
+                  <td><strong>Research & Innovation</strong></td>
+                  <td>5%</td>
+                  <td>AI safety features, blockchain integration, user experience research</td>
+                </tr>
+                <tr>
+                  <td><strong>Contingency Reserve</strong></td>
+                  <td>5%</td>
+                  <td>Emergency fund, unforeseen expenses, market volatility buffer</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Transparency & Accountability</h2>
+          <ul>
+            <li><strong>Regular updates:</strong> Quarterly reports on fund utilization</li>
+            <li><strong>Community oversight:</strong> Token holders can track spending through blockchain</li>
+            <li><strong>Third-party audits:</strong> Annual financial audits by reputable firms</li>
+            <li><strong>Milestone-based releases:</strong> Funds released as development milestones are achieved</li>
+          </ul>
+
+          <div class="callout green">
+            <p><strong>Our commitment:</strong> Every dollar raised will be used to create a safer, more empowering transportation experience for women and girls worldwide.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Page 7: Roadmap -->
+      <article class="page" id="page7">
+        <div class="page-header">
+          <div class="page-number">Page 07</div>
+          <h1 class="page-title"><span class="highlight-pink">Roadmap</span></h1>
+        </div>
+        <div class="page-body">
+          <h2>Phase 1: Foundation (Q1 2025 - Oct-Dec 2025)</h2>
+          <ul>
+            <li>✓ Concept development and market research</li>
+            <li>✓ Team assembly and advisory board formation</li>
+            <li>✓ Website launch and whitepaper release</li>
+            <li>✓ Token smart contract development</li>
+            <li>Token sale launch</li>
+          </ul>
+
+          <h2>Phase 2: Development (Q2 2025 - Jan-Mar 2026)</h2>
+          <ul>
+            <li>Mobile app development (iOS & Android)</li>
+            <li>Driver recruitment and training program</li>
+            <li>Partnership agreements with local authorities</li>
+            <li>Security systems and safety protocols implementation</li>
+            <li>Beta testing with select users</li>
+          </ul>
+
+          <h2>Phase 3: Launch (Q3-Q4 2025 - Apr-Sep 2026)</h2>
+          <ul>
+            <li>Pilot launch in 3 major cities</li>
+            <li>Full app release on App Store and Google Play</li>
+            <li>Marketing campaign activation</li>
+            <li>Community rewards program launch</li>
+            <li>24/7 customer support activation</li>
+          </ul>
+
+          <h2>Phase 4: Expansion (2026 - Oct 2026+)</h2>
+          <ul>
+            <li>Expansion to 20+ cities globally</li>
+            <li>Integration of additional payment methods</li>
+            <li>Staking and governance features</li>
+            <li>Strategic partnerships with women's organizations</li>
+            <li>AI-powered safety features</li>
+          </ul>
+
+          <h2>Phase 5: Global Impact (2027+)</h2>
+          <ul>
+            <li>Presence in 100+ cities worldwide</li>
+            <li>Electric vehicle fleet transition</li>
+            <li>Education and empowerment programs</li>
+            <li>Policy advocacy for women's safety</li>
+            <li>Continuous innovation and improvement</li>
+          </ul>
+
+          <div class="callout pink">
+            <p><strong>Vision:</strong> By 2030, Pink Taxi aims to be the world's leading safe transportation platform for women, operating in every major city globally.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Page 8: Disclaimer -->
+      <article class="page" id="page8">
+        <div class="page-header">
+          <div class="page-number">Page 08</div>
+          <h1 class="page-title">Disclaimer</h1>
+        </div>
+        <div class="page-body">
+          <div class="callout warning">
+            <p><strong>⚠️ Important:</strong> Please read this disclaimer carefully before proceeding.</p>
+          </div>
+
+          <p>This White Paper is for informational purposes only and does not constitute an offer, solicitation, or recommendation to buy, sell, or hold any securities or tokens. The information contained herein is subject to change without notice.</p>
+
+          <h2>No Investment Advice</h2>
+          <p>Nothing in this document should be considered as investment, legal, tax, or financial advice. You should consult with your own advisors before making any investment decisions.</p>
+
+          <h2>Forward-Looking Statements</h2>
+          <p>This document contains forward-looking statements regarding future events and projections. These statements involve risks and uncertainties. Actual results may differ materially.</p>
+
+          <h2>No Guarantees</h2>
+          <p>Pink Taxi Group LTD makes no representations or warranties regarding the success of the platform, token value, or future returns.</p>
+
+          <h2>Regulatory Compliance</h2>
+          <p>Token purchasers are responsible for determining whether the purchase, sale, or use of PTDT tokens is legal in their jurisdiction.</p>
+
+          <h2>Risk of Loss</h2>
+          <p>Purchasing PTDT tokens involves significant risk. You should only participate if you can afford to lose your entire investment.</p>
+
+          <h2>No Liability</h2>
+          <p>To the maximum extent permitted by law, Pink Taxi Group LTD shall not be liable for any damages arising from your participation in the token sale.</p>
+
+          <h2>Intellectual Property</h2>
+          <p>All content, trademarks, and intellectual property in this document are owned by Pink Taxi Group LTD.</p>
+
+          <div class="callout green" style="margin-top: 30px;">
+            <p><strong>Contact Us</strong></p>
+            <p>For questions or concerns:</p>
+            <p>Email: <a href="mailto:token@ptdt.taxi" style="color: var(--green);">token@ptdt.taxi</a></p>
+            <p>Website: <a href="https://www.ptdt.taxi" style="color: var(--green);">www.ptdt.taxi</a></p>
+          </div>
+
+          <p style="text-align: center; margin-top: 40px; color: var(--text-dim); font-size: 0.85rem;">
+            <strong>© 2025 Pink Taxi Group LTD. All rights reserved.</strong><br>
+            Last updated: October 2025
+          </p>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <!-- Back Button -->
+  <a href="/" class="back-btn">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+    </svg>
+    Back to Peether PTDT Homepage
+  </a>
+
+  <!-- JavaScript -->
+  <script>
+    let currentPage = 1;
+    const totalPages = 8;
+    let lastDirection = 1;
+
+    function updatePage() {
+      const pages = document.querySelectorAll('.page');
+      
+      pages.forEach((page, index) => {
+        const pageNum = index + 1;
+        page.classList.remove('active', 'exit-left');
+        
+        if (pageNum === currentPage) {
+          page.classList.add('active');
+        } else if (pageNum < currentPage) {
+          page.classList.add('exit-left');
+        }
+      });
+
+      // Update UI elements
+      document.getElementById('pageLabel').textContent = `Page ${currentPage} of ${totalPages}`;
+      const progress = ((currentPage - 1) / (totalPages - 1)) * 100;
+      document.getElementById('progressFill').style.width = progress + '%';
+      document.getElementById('prevBtn').disabled = currentPage === 1;
+      document.getElementById('nextBtn').disabled = currentPage === totalPages;
+      document.getElementById('pageJump').value = currentPage;
+
+      // Update URL hash
+      window.location.hash = 'p' + currentPage;
+
+      // Scroll page body to top
+      const activeBody = document.querySelector('.page.active .page-body');
+      if (activeBody) {
+        activeBody.scrollTop = 0;
+      }
+    }
+
+    function changePage(direction) {
+      const newPage = currentPage + direction;
+      if (newPage >= 1 && newPage <= totalPages) {
+        lastDirection = direction;
+        currentPage = newPage;
+        updatePage();
+      }
+    }
+
+    function jumpToPage(page) {
+      const newPage = parseInt(page, 10);
+      if (newPage >= 1 && newPage <= totalPages) {
+        lastDirection = newPage > currentPage ? 1 : -1;
+        currentPage = newPage;
+        updatePage();
+      }
+    }
+
+    function goToPage(page) {
+      jumpToPage(page);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+      
+      switch(e.key) {
+        case 'ArrowRight':
+        case 'ArrowDown':
+          e.preventDefault();
+          changePage(1);
+          break;
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          e.preventDefault();
+          changePage(-1);
+          break;
+        case 'Home':
+          e.preventDefault();
+          jumpToPage(1);
+          break;
+        case 'End':
+          e.preventDefault();
+          jumpToPage(totalPages);
+          break;
+      }
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          changePage(1); // Swipe left = next
+        } else {
+          changePage(-1); // Swipe right = prev
+        }
+      }
+    }
+
+    // Initialize on load
+    window.addEventListener('load', () => {
+      const hash = window.location.hash.replace('#p', '');
+      if (hash && !isNaN(hash)) {
+        const page = parseInt(hash, 10);
+        if (page >= 1 && page <= totalPages) {
+          currentPage = page;
+        }
+      }
+      updatePage();
+    });
+  </script>
+</body>
+</html>

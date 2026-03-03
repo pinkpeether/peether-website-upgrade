@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTDT Sanction-Free Certificate | Peether</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./ptdtlogo.png">
+    
+    <!-- Meta Tags for Social Sharing -->
+    <meta property="og:title" content="PTDT Sanction-Free Certificate | Officially Cleared">
+    <meta property="og:description" content="Peether PTDT has passed Blockchair's global sanctions scan - 100% clean, no flags, fully auditable.">
+    <meta property="og:image" content="https://ptdt.taxi/cert-preview.png">
+    <meta property="og:url" content="https://ptdt.taxi/cert">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: 'Lexend', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 80%, rgba(251, 10, 139, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(42, 233, 123, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(2%, 2%) rotate(1deg); }
+            50% { transform: translate(-1%, 3%) rotate(-1deg); }
+            75% { transform: translate(3%, -2%) rotate(2deg); }
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header Banner */
+        .header-banner {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .badge-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, rgba(42, 233, 123, 0.15), rgba(16, 185, 129, 0.1));
+            border: 2px solid rgba(42, 233, 123, 0.4);
+            border-radius: 50px;
+            padding: 12px 28px;
+            margin-bottom: 24px;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(42, 233, 123, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(42, 233, 123, 0.5); }
+        }
+
+        .badge-icon {
+            font-size: 28px;
+        }
+
+        .badge-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: #2ae97b;
+            text-transform: uppercase;
+        }
+
+        .main-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FB0A8B 0%, #a855f7 50%, #2ae97b 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 4s ease infinite;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .subtitle strong {
+            color: #2ae97b;
+        }
+
+        /* Certificate Card */
+        .certificate-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FB0A8B, #a855f7, #2ae97b);
+        }
+
+        /* Cleared Stamp */
+        .cleared-stamp {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 120px;
+            height: 120px;
+            border: 4px solid #2ae97b;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(15deg);
+            background: rgba(42, 233, 123, 0.1);
+            box-shadow: 0 0 30px rgba(42, 233, 123, 0.3);
+        }
+
+        .cleared-stamp .stamp-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 18px;
+            color: #2ae97b;
+            letter-spacing: 2px;
+        }
+
+        .cleared-stamp .stamp-check {
+            font-size: 32px;
+            margin-bottom: 4px;
+        }
+
+        /* Certificate Header */
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+            padding-right: 140px;
+        }
+
+        .cert-logo-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cert-logo {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(251, 10, 139, 0.3));
+        }
+
+        .cert-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cert-brand-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FB0A8B, #d9076f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cert-brand-sub {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .qr-section {
+            text-align: center;
+        }
+
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .qr-label {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* Certificate Title */
+        .cert-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .cert-date {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+            margin-bottom: 32px;
+        }
+
+        /* Info Rows */
+        .info-section {
+            margin-bottom: 24px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .info-label {
+            width: 160px;
+            flex-shrink: 0;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            font-size: 15px;
+            color: #ffffff;
+            word-break: break-all;
+        }
+
+        .info-value.address {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(42, 233, 123, 0.2), rgba(16, 185, 129, 0.1));
+            border: 1px solid rgba(42, 233, 123, 0.4);
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-weight: 600;
+            color: #2ae97b;
+        }
+
+        .status-badge .check {
+            font-size: 18px;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            margin: 24px 0;
+        }
+
+        /* Source Sections */
+        .source-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .source-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .source-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        .source-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2ae97b;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            word-break: break-all;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .source-link:hover {
+            color: #FB0A8B;
+        }
+
+        .source-detail {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .disclaimer-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .disclaimer-text {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1.7;
+        }
+
+        .disclaimer-text a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: underline;
+        }
+
+        /* Powered By */
+        .powered-by {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .powered-by-text {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .blockchair-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-btn-primary {
+            background: linear-gradient(135deg, #FB0A8B, #d9076f);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(251, 10, 139, 0.4);
+        }
+
+        .cta-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(251, 10, 139, 0.6);
+        }
+
+        .cta-btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-btn-secondary:hover {
+            border-color: #2ae97b;
+            color: #2ae97b;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-logo {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 16px;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .footer-link {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #FB0A8B;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+
+            .certificate-card {
+                padding: 24px 20px;
+            }
+
+            .cleared-stamp {
+                width: 80px;
+                height: 80px;
+                top: 20px;
+                right: 20px;
+            }
+
+            .cleared-stamp .stamp-text {
+                font-size: 12px;
+            }
+
+            .cleared-stamp .stamp-check {
+                font-size: 22px;
+            }
+
+            .cert-header {
+                flex-direction: column;
+                gap: 20px;
+                padding-right: 100px;
+            }
+
+            .cert-logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .cert-brand-name {
+                font-size: 22px;
+            }
+
+            .info-row {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .info-label {
+                width: 100%;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: #ffffff;
+                color: #000000;
+            }
+
+            .bg-animation,
+            .cta-section,
+            .footer {
+                display: none;
+            }
+
+            .certificate-card {
+                background: #ffffff;
+                border: 2px solid #e0e0e0;
+                box-shadow: none;
+            }
+
+            .main-title,
+            .cert-brand-name {
+                -webkit-text-fill-color: #FB0A8B;
+            }
+
+            .info-value,
+            .source-name,
+            .cert-title {
+                color: #000000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
+    <div class="container">
+
+        <!-- Header Banner -->
+        <div class="header-banner">
+            <div class="badge-container">
+                <span class="badge-icon">🎖️</span>
+                <span class="badge-text">Officially Cleared by Blockchair</span>
+            </div>
+            
+            <h1 class="main-title">SANCTION-FREE CERTIFICATE</h1>
+            
+            <p class="subtitle">
+                Peether PTDT has passed <strong>Blockchair's global sanctions scanner</strong> — the same one used by 
+                <strong>OFAC (U.S. Treasury)</strong> and major financial institutions. 
+                <strong>100% clean. No flags. No shadows.</strong>
+            </p>
+        </div>
+
+        <!-- Certificate Card -->
+        <div class="certificate-card">
+            
+            <!-- Cleared Stamp -->
+            <div class="cleared-stamp">
+                <span class="stamp-check">✓</span>
+                <span class="stamp-text">CLEARED</span>
+            </div>
+
+            <!-- Certificate Header -->
+            <div class="cert-header">
+                <div class="cert-logo-section">
+                    <img src="./ptdtlogo.png" alt="PTDT" class="cert-logo">
+                    <div class="cert-brand">
+                        <span class="cert-brand-name">PEETHER PTDT</span>
+                        <span class="cert-brand-sub">Smart Contract Token</span>
+                    </div>
+                </div>
+                
+                <div class="qr-section">
+                    <div class="qr-code">
+                        <!-- Replace with actual QR code image -->
+                        <img src="./qr-cert.png" alt="QR Code">
+                    </div>
+                    <div class="qr-label">SCAN TO VERIFY</div>
+                </div>
+            </div>
+
+            <!-- Certificate Title -->
+            <h2 class="cert-title">AML Address Report</h2>
+            <p class="cert-date">Verified on December 28, 2025 at 19:40 UTC</p>
+
+            <!-- Main Info -->
+            <div class="info-section">
+                <div class="info-row">
+                    <div class="info-label">Contract</div>
+                    <div class="info-value address">0x66c6fc5e7f99272134a52df9e88d9ed83e89278</div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Status</div>
+                    <div class="info-value">
+                        <span class="status-badge">
+                            <span class="check">✓</span>
+                            NO SANCTIONS DETECTED
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Source: OFAC -->
+            <div class="source-section">
+                <div class="source-header">
+                    <span class="source-name">🇺🇸 OFAC (U.S. Treasury)</span>
+                    <span class="source-status">✓ CLEAR</span>
+                </div>
+                <a href="https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN_ENHANCED.XML" 
+                   target="_blank" 
+                   class="source-link">
+                    sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN_ENHANCED.XML
+                </a>
+            </div>
+
+            <!-- Source: OFSI -->
+            <div class="source-section">
+                <div class="source-header">
+                    <span class="source-name">🇬🇧 OFSI (UK Treasury)</span>
+                    <span class="source-status">✓ CLEAR</span>
+                </div>
+                <a href="https://docs.fcdo.gov.uk/docs/UK-Sanctions-List.html" 
+                   target="_blank" 
+                   class="source-link">
+                    docs.fcdo.gov.uk/docs/UK-Sanctions-List.html
+                </a>
+            </div>
+
+            <!-- Source: On-Chain -->
+            <div class="source-section">
+                <div class="source-header">
+                    <span class="source-name">⛓️ On-Chain Analysis</span>
+                    <span class="source-status">✓ CLEAR</span>
+                </div>
+                <div class="source-detail">
+                    Analyzed <strong>15 contracts</strong> across <strong>Ethereum & TRON</strong> blockchains
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="disclaimer">
+                <div class="disclaimer-title">DISCLAIMER</div>
+                <div class="disclaimer-text">
+                    Blockchair takes all reasonable measures to keep the address sanctions report accurate and up to date, 
+                    utilizing data from official sanctions publications including OFAC (U.S. Department of the Treasury) 
+                    and OFSI (HM Treasury). Blockchair also analyzes on-chain data to detect and report blacklisted addresses.
+                    <br><br>
+                    However, Blockchair provides no express or implied warranties regarding the completeness, accuracy, 
+                    timeliness, or applicability of the information provided herein. All information is provided "as is" 
+                    and may be changed or removed without notice. Users assume all risks and responsibilities for verifying 
+                    and using this information.
+                </div>
+            </div>
+
+            <!-- Powered By -->
+            <div class="powered-by">
+                <span class="powered-by-text">VERIFIED BY</span>
+                <span class="blockchair-logo">BLOCKCHAIR</span>
+            </div>
+
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h3 class="cta-title">Ready to Join the PTDT Community?</h3>
+            <div class="cta-buttons">
+                <a href="https://ptdt.taxi" class="cta-btn cta-btn-primary">
+                    <span>🚀</span>
+                    <span>Visit Main Site</span>
+                </a>
+                <a href="https://dapp.ptdt.taxi" class="cta-btn cta-btn-secondary">
+                    <span>💎</span>
+                    <span>Launch DApp</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <img src="./ptdtlogo.png" alt="PTDT" class="footer-logo">
+            <p class="footer-text">© 2026 Peether PTDT. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://ptdt.taxi" class="footer-link">Website</a>
+                <a href="https://dapp.ptdt.taxi" class="footer-link">DApp</a>
+                <a href="https://ptdt.taxi/whitepaper.html" class="footer-link">Whitepaper</a>
+                <a href="mailto:support@ptdt.taxi" class="footer-link">Contact</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
