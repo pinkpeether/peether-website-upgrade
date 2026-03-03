@@ -1,0 +1,33 @@
+/* Custom styles for PTDT Main Site */
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove any default margins/padding on root */
+#root {
+  min-height: 100vh;
+}
+
+/* Custom utility classes if needed */
+.gradient-text {
+  background: linear-gradient(to right, #ff4fa3, #0fb38a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced SVG Circle Button Hover Effects */
+.group:hover .drop-shadow-lg {
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.25));
+  transition: filter 0.3s ease;
+}
+
+/* Smooth text transition on hover */
+.group:hover span {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+/* Optional: Add custom animations or effects here */
