@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie Policy | PTDT - Peether Token</title>
+  <meta name="description" content="Cookie Policy for PTDT (Peether) Token Sale Platform. Learn about how we use cookies and your choices.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --pink: #FB0A8B;
+      --pink-dark: #d1087a;
+      --green: #2ae97b;
+      --green-dark: #10b981;
+      --purple: #9333ea;
+      --dark: #1a1a2e;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Lexend', sans-serif;
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    /* Header */
+    .header {
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(251, 10, 139, 0.2);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+    }
+
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(251, 10, 139, 0.1);
+      border: 1px solid rgba(251, 10, 139, 0.3);
+      border-radius: 12px;
+      color: var(--pink);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--pink);
+      color: white;
+      transform: translateX(-4px);
+    }
+
+    /* Main Content */
+    .main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .hero-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 48px;
+      box-shadow: 0 20px 60px rgba(251, 10, 139, 0.3);
+    }
+
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .last-updated {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 8px 16px;
+      background: rgba(42, 233, 123, 0.1);
+      border: 1px solid rgba(42, 233, 123, 0.3);
+      border-radius: 20px;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Content Sections */
+    .section {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .section:hover {
+      border-color: rgba(251, 10, 139, 0.3);
+      box-shadow: 0 10px 40px rgba(251, 10, 139, 0.1);
+    }
+
+    .section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section h2 .icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .section h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--pink);
+      margin: 24px 0 12px;
+    }
+
+    .section p {
+      color: var(--gray-300);
+      margin-bottom: 16px;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .section li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+      color: var(--gray-300);
+    }
+
+    .section li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    /* Cookie Table */
+    .cookie-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    .cookie-table th,
+    .cookie-table td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .cookie-table th {
+      background: rgba(251, 10, 139, 0.1);
+      color: var(--pink);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cookie-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .cookie-table td {
+      color: var(--gray-300);
+    }
+
+    .cookie-name {
+      font-family: 'Monaco', 'Consolas', monospace;
+      background: rgba(42, 233, 123, 0.1);
+      color: var(--green);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      display: inline-block;
+    }
+
+    .cookie-type {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .cookie-type.necessary {
+      background: rgba(99, 102, 241, 0.2);
+      color: #818cf8;
+    }
+
+    .cookie-type.analytics {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+    }
+
+    .cookie-type.marketing {
+      background: rgba(251, 10, 139, 0.2);
+      color: #f472b6;
+    }
+
+    .cookie-type.functional {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+    }
+
+    /* Preference Card */
+    .preference-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      margin: 16px 0;
+    }
+
+    .preference-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .preference-icon.necessary { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); }
+    .preference-icon.analytics { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+    .preference-icon.marketing { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+    .preference-icon.functional { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+
+    .preference-content h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .preference-content p {
+      font-size: 14px;
+      color: var(--gray-400);
+      margin: 0;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(251, 10, 139, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+      border: 1px solid rgba(251, 10, 139, 0.3);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .cta-section h2 {
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: var(--gray-300);
+      margin-bottom: 24px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+      border: none;
+      border-radius: 14px;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(251, 10, 139, 0.3);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(251, 10, 139, 0.4);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 60px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      color: var(--gray-400);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--pink);
+    }
+
+    .footer-copyright {
+      color: var(--gray-500);
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .section {
+        padding: 24px 20px;
+      }
+
+      .cookie-table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .cookie-table th,
+      .cookie-table td {
+        padding: 12px;
+        font-size: 13px;
+      }
+
+      .preference-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cta-section {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <a href="/" class="logo-link">
+        <img src="/ptdtlogo.png" alt="PTDT Logo" class="logo">
+        <span class="logo-text">PTDT</span>
+      </a>
+      <a href="/" class="back-btn">
+        ← Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="hero-icon">🍪</div>
+      <h1>Cookie Policy</h1>
+      <p>This policy explains how PTDT (Peether) uses cookies and similar technologies on our website and dApp.</p>
+      <span class="last-updated">Last Updated: January 2026</span>
+    </div>
+
+    <!-- What Are Cookies -->
+    <section class="section">
+      <h2><span class="icon">📖</span> What Are Cookies?</h2>
+      <p>
+        Cookies are small text files that are stored on your device (computer, tablet, or mobile) when you visit a website. 
+        They help websites remember your preferences, understand how you use the site, and improve your overall experience.
+      </p>
+      <p>
+        Cookies can be "session cookies" (deleted when you close your browser) or "persistent cookies" (remain on your device for a set period).
+      </p>
+    </section>
+
+    <!-- How We Use Cookies -->
+    <section class="section">
+      <h2><span class="icon">🎯</span> How We Use Cookies</h2>
+      <p>PTDT uses cookies for the following purposes:</p>
+      <ul>
+        <li><strong>Essential Operations:</strong> To ensure our website and dApp function correctly</li>
+        <li><strong>Authentication:</strong> To keep you signed in and maintain your session</li>
+        <li><strong>Preferences:</strong> To remember your settings and choices</li>
+        <li><strong>Analytics:</strong> To understand how visitors use our platform</li>
+        <li><strong>Security:</strong> To protect against fraud and unauthorized access</li>
+      </ul>
+    </section>
+
+    <!-- Types of Cookies -->
+    <section class="section">
+      <h2><span class="icon">📂</span> Types of Cookies We Use</h2>
+
+      <div class="preference-card">
+        <div class="preference-icon necessary">🔒</div>
+        <div class="preference-content">
+          <h4>Necessary Cookies</h4>
+          <p>Essential for the website to function. These cannot be disabled as they are required for core functionality like authentication, security, and session management.</p>
+        </div>
+      </div>
+
+      <div class="preference-card">
+        <div class="preference-icon analytics">📊</div>
+        <div class="preference-content">
+          <h4>Analytics Cookies</h4>
+          <p>Help us understand how visitors interact with our website by collecting anonymous information. This data helps us improve our platform and user experience.</p>
+        </div>
+      </div>
+
+      <div class="preference-card">
+        <div class="preference-icon marketing">📢</div>
+        <div class="preference-content">
+          <h4>Marketing Cookies</h4>
+          <p>Used to track visitors across websites to display relevant advertisements. These cookies help us measure the effectiveness of our marketing campaigns.</p>
+        </div>
+      </div>
+
+      <div class="preference-card">
+        <div class="preference-icon functional">⚙️</div>
+        <div class="preference-content">
+          <h4>Functional Cookies</h4>
+          <p>Enable enhanced functionality and personalization, such as remembering your language preference, display settings, and other customizations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cookie Details Table -->
+    <section class="section">
+      <h2><span class="icon">📋</span> Detailed Cookie List</h2>
+      <p>Below is a detailed list of cookies used on our platform:</p>
+
+      <table class="cookie-table">
+        <thead>
+          <tr>
+            <th>Cookie Name</th>
+            <th>Type</th>
+            <th>Purpose</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="cookie-name">ptdt_cookie_consent</span></td>
+            <td><span class="cookie-type necessary">Necessary</span></td>
+            <td>Stores your cookie consent preferences</td>
+            <td>1 year</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">ptdt_cookie_preferences</span></td>
+            <td><span class="cookie-type necessary">Necessary</span></td>
+            <td>Stores your detailed cookie category choices</td>
+            <td>1 year</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">sb-*-auth-token</span></td>
+            <td><span class="cookie-type necessary">Necessary</span></td>
+            <td>Supabase authentication session token</td>
+            <td>Session</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">ptdt_dapp_user</span></td>
+            <td><span class="cookie-type functional">Functional</span></td>
+            <td>Stores user session data for dApp</td>
+            <td>Session</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">wagmi.store</span></td>
+            <td><span class="cookie-type functional">Functional</span></td>
+            <td>Wallet connection state for Web3 interactions</td>
+            <td>Persistent</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">_ga</span></td>
+            <td><span class="cookie-type analytics">Analytics</span></td>
+            <td>Google Analytics - distinguishes users</td>
+            <td>2 years</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">_ga_*</span></td>
+            <td><span class="cookie-type analytics">Analytics</span></td>
+            <td>Google Analytics - maintains session state</td>
+            <td>2 years</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Third-Party Cookies -->
+    <section class="section">
+      <h2><span class="icon">🌐</span> Third-Party Cookies</h2>
+      <p>We may use third-party services that set their own cookies:</p>
+      <ul>
+        <li><strong>Supabase:</strong> Authentication and database services</li>
+        <li><strong>Brevo (Sendinblue):</strong> Email delivery and tracking</li>
+        <li><strong>Google Analytics:</strong> Website traffic analysis (if enabled)</li>
+        <li><strong>Wallet Providers:</strong> MetaMask, WalletConnect, and other Web3 wallets</li>
+      </ul>
+      <p>
+        These third parties have their own privacy policies governing their use of cookies. 
+        We recommend reviewing their policies for more information.
+      </p>
+    </section>
+
+    <!-- Managing Cookies -->
+    <section class="section">
+      <h2><span class="icon">⚙️</span> Managing Your Cookie Preferences</h2>
+      <p>You have several options to manage cookies:</p>
+      
+      <h3>1. Through Our Cookie Banner</h3>
+      <p>
+        When you first visit our website, you'll see a cookie consent banner. You can:
+      </p>
+      <ul>
+        <li>Accept all cookies</li>
+        <li>Reject all optional cookies</li>
+        <li>Customize your preferences by category</li>
+      </ul>
+
+      <h3>2. Through Your Browser</h3>
+      <p>
+        Most browsers allow you to control cookies through their settings. You can:
+      </p>
+      <ul>
+        <li>View what cookies are stored</li>
+        <li>Delete individual or all cookies</li>
+        <li>Block cookies from specific or all websites</li>
+        <li>Set preferences for first-party vs third-party cookies</li>
+      </ul>
+
+      <h3>3. Browser-Specific Instructions</h3>
+      <ul>
+        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" style="color: var(--pink);">Google Chrome</a></li>
+        <li><a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" target="_blank" style="color: var(--pink);">Mozilla Firefox</a></li>
+        <li><a href="https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac" target="_blank" style="color: var(--pink);">Safari</a></li>
+        <li><a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" style="color: var(--pink);">Microsoft Edge</a></li>
+      </ul>
+
+      <p style="margin-top: 20px; padding: 16px; background: rgba(245, 158, 11, 0.1); border-radius: 12px; border-left: 4px solid #f59e0b;">
+        <strong>⚠️ Note:</strong> Disabling certain cookies may affect the functionality of our website and dApp. 
+        Essential cookies cannot be disabled as they are required for the platform to work properly.
+      </p>
+    </section>
+
+    <!-- Updates to Policy -->
+    <section class="section">
+      <h2><span class="icon">🔄</span> Updates to This Policy</h2>
+      <p>
+        We may update this Cookie Policy from time to time to reflect changes in our practices or for legal, 
+        operational, or regulatory reasons. We encourage you to review this policy periodically.
+      </p>
+      <p>
+        The "Last Updated" date at the top of this page indicates when this policy was last revised. 
+        Any changes become effective when we post the revised policy.
+      </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="cta-section">
+      <h2><span class="icon">💬</span> Questions?</h2>
+      <p>
+        If you have any questions about our use of cookies or this policy, 
+        please don't hesitate to contact us.
+      </p>
+      <a href="mailto:privacy@ptdt.taxi" class="cta-btn">
+        📧 Contact Us
+      </a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/cookies.html">Cookie Policy</a>
+      <a href="/#contact">Contact</a>
+    </div>
+    <p class="footer-copyright">
+      © 2025 PTDT (Peether). All rights reserved.
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PTDT Developer Portal | Build with Peether</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@300;700&family=Fira+Code:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #0a0a0f, #1a1a2e, #0a0a0f);
+      color: white;
+      min-height: 100vh;
+    }
+    
+    .particle-bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      opacity: 0.3;
+    }
+    
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    .gradient-text {
+      background: linear-gradient(to right, #ff4fa3, #0fb38a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .card-glow {
+      transition: all 0.3s;
+    }
+    
+    .card-glow:hover {
+      box-shadow: 0 0 30px rgba(255, 79, 163, 0.3);
+      transform: translateY(-5px);
+    }
+    
+    .grid-bg {
+      background-image: 
+        linear-gradient(rgba(57, 191, 57, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57, 191, 57, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+    }
+    
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Particle Background -->
+  <div class="particle-bg grid-bg"></div>
+  
+  <div class="relative z-10">
+    
+    <!-- Header -->
+    <header class="container mx-auto px-6 py-8">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <img src="/pinkptdtlogo.png" alt="PTDT Logo" class="h-12">
+          <div>
+            <h1 class="text-2xl font-bold text-white">Developer Portal</h1>
+            <p class="text-sm text-gray-400">Build with Peether PTDT</p>
+          </div>
+        </div>
+        <a href="/" class="text-pink-500 hover:text-pink-400 transition-colors">← Back to Main Site</a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-6 py-16 text-center">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Slogan -->
+        <div class="mb-8">
+          <div class="text-5xl lg:text-7xl font-bold leading-tight mb-4">
+            <div class="mb-2">
+              <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 300; color: #e2e8f0;">Trust the </span>
+              <span style="font-family: 'Fira Code', monospace; font-weight: 700; color: #E73589; text-shadow: 0 0 20px rgba(231, 53, 137, 0.5);">{Code}</span>
+              <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 300; color: #e2e8f0;">,</span>
+            </div>
+            <div class="pl-8 lg:pl-16">
+              <span style="font-weight: 300; color: #64748b;">// Not the </span>
+              <span style="font-weight: 700; color: #002FFF; text-decoration: line-through; text-decoration-color: #FF2F00; text-decoration-thickness: 3px;">Cult</span>
+              <span style="font-weight: 700; color: #FF2F00;">!</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-xl text-gray-300 mb-8">
+          Everything you need to build blockchain-powered ride-hailing applications.<br/>
+          Production-ready APIs, security audits, and comprehensive guides.
+        </p>
+
+        <div class="flex gap-4 justify-center flex-wrap">
+          <a href="#quick-start" class="bg-gradient-to-r from-pink-500 to-purple-500 px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
+            Get Started
+          </a>
+          <a href="https://github.com/pinkpeether" target="_blank" class="bg-white/10 border border-white/20 px-8 py-4 rounded-full font-bold hover:bg-white/20 transition-colors">
+            View on GitHub
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+          <div>
+            <div class="text-3xl font-bold gradient-text">9.2/10</div>
+            <div class="text-gray-400 text-sm">Security Score</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold gradient-text">100%</div>
+            <div class="text-gray-400 text-sm">Open Source</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold gradient-text">OFAC ✓</div>
+            <div class="text-gray-400 text-sm">Gov Verified</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              <div class="text-xl font-bold text-green-500">Live</div>
+            </div>
+            <div class="text-gray-400 text-sm">Production Ready</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Documentation Grid -->
+    <section id="quick-start" class="container mx-auto px-6 py-16">
+      <h2 class="text-4xl font-bold text-center mb-12">📚 Complete Documentation</h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        
+        <!-- API Documentation -->
+        <a href="/ptdt-docs/ptdt_api_docs.html" class="card-glow bg-gradient-to-br from-purple-900/60 to-pink-900/40 backdrop-blur-lg rounded-2xl p-8 border border-purple-500/30">
+          <div class="text-5xl mb-4">📡</div>
+          <h3 class="text-2xl font-bold mb-3">API Documentation</h3>
+          <p class="text-gray-300 mb-4">Complete REST API and Web3 integration reference with code examples.</p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs">REST API</span>
+            <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs">Web3</span>
+            <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs">SDK</span>
+          </div>
+        </a>
+
+        <!-- Security Audit -->
+        <a href="/ptdt-docs/ptdt_security_response_page.html" class="card-glow bg-gradient-to-br from-green-900/60 to-emerald-900/40 backdrop-blur-lg rounded-2xl p-8 border border-green-500/30">
+          <div class="text-5xl mb-4">🛡️</div>
+          <h3 class="text-2xl font-bold mb-3">Security Audit</h3>
+          <p class="text-gray-300 mb-4">Professional security analysis with 9.2/10 score. OFAC & OFSI verified.</p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs">9.2/10 Score</span>
+            <span class="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs">OFAC ✓</span>
+            <span class="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs">OFSI ✓</span>
+          </div>
+        </a>
+
+        <!-- Integration Guide -->
+        <a href="/ptdt-docs/ptdt_integrated_guide.html" class="card-glow bg-gradient-to-br from-blue-900/60 to-cyan-900/40 backdrop-blur-lg rounded-2xl p-8 border border-blue-500/30">
+          <div class="text-5xl mb-4">📖</div>
+          <h3 class="text-2xl font-bold mb-3">Integration Guide</h3>
+          <p class="text-gray-300 mb-4">Step-by-step tutorials for integrating PTDT into your application.</p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-xs">Tutorials</span>
+            <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-xs">Examples</span>
+            <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-xs">Best Practices</span>
+          </div>
+        </a>
+
+        <!-- Live Dashboard -->
+        <a href="/ptdt-docs/dashboard.html" class="card-glow bg-gradient-to-br from-yellow-900/60 to-orange-900/40 backdrop-blur-lg rounded-2xl p-8 border border-yellow-500/30">
+          <div class="text-5xl mb-4">📊</div>
+          <h3 class="text-2xl font-bold mb-3">Live Dashboard</h3>
+          <p class="text-gray-300 mb-4">Real-time network metrics, transactions, and analytics.</p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-xs">Real-time</span>
+            <span class="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-xs">Analytics</span>
+            <span class="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-xs">Live Data</span>
+          </div>
+        </a>
+
+        <!-- Download Center -->
+        <a href="/ptdt-docs/ptdt_pdf_package.html" class="card-glow bg-gradient-to-br from-pink-900/60 to-rose-900/40 backdrop-blur-lg rounded-2xl p-8 border border-pink-500/30">
+          <div class="text-5xl mb-4">📦</div>
+          <h3 class="text-2xl font-bold mb-3">Download Center</h3>
+          <p class="text-gray-300 mb-4">PDF guides, documentation packages, and offline resources.</p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="bg-pink-500/20 text-pink-300 px-3 py-1 rounded-full text-xs">PDFs</span>
+            <span class="bg-pink-500/20 text-pink-300 px-3 py-1 rounded-full text-xs">Guides</span>
+            <span class="bg-pink-500/20 text-pink-300 px-3 py-1 rounded-full text-xs">Offline</span>
+          </div>
+        </a>
+
+        <!-- GitHub Repository -->
+        <a href="https://github.com/pinkpeether/peether-protocol" target="_blank" class="card-glow bg-gradient-to-br from-gray-900/60 to-slate-900/40 backdrop-blur-lg rounded-2xl p-8 border border-gray-500/30">
+          <div class="text-5xl mb-4">💻</div>
+          <h3 class="text-2xl font-bold mb-3">GitHub Repository</h3>
+          <p class="text-gray-300 mb-4">Complete source code, examples, and community contributions.</p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="bg-gray-500/20 text-gray-300 px-3 py-1 rounded-full text-xs">Open Source</span>
+            <span class="bg-gray-500/20 text-gray-300 px-3 py-1 rounded-full text-xs">MIT License</span>
+            <span class="bg-gray-500/20 text-gray-300 px-3 py-1 rounded-full text-xs">Active</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section class="container mx-auto px-6 py-16">
+      <div class="max-w-4xl mx-auto bg-gradient-to-br from-purple-900/40 to-pink-900/40 backdrop-blur-lg rounded-2xl p-12 border border-purple-500/30">
+        <h2 class="text-3xl font-bold mb-6">🚀 Quick Start</h2>
+        
+        <div class="bg-gray-900 rounded-lg p-6 mb-6 font-mono text-sm">
+          <div class="text-green-400 mb-2"># Install the SDK</div>
+          <div class="text-white">npm install @ptdt/sdk ethers</div>
+          
+          <div class="text-green-400 mt-4 mb-2"># Initialize client</div>
+          <div class="text-white">
+            import { PTDTClient } from '@ptdt/sdk';<br/>
+            <br/>
+            const client = new PTDTClient({<br/>
+            &nbsp;&nbsp;network: 'mainnet'<br/>
+            });<br/>
+            <br/>
+            <span class="text-green-400">// Start building!</span>
+          </div>
+        </div>
+
+        <div class="flex gap-4 flex-wrap">
+          <a href="/ptdt-docs/ptdt_api_docs.html" class="bg-white/10 hover:bg-white/20 px-6 py-3 rounded-lg transition-colors">
+            View Full API Docs →
+          </a>
+          <a href="/ptdt-docs/ptdt_integrated_guide.html" class="bg-white/10 hover:bg-white/20 px-6 py-3 rounded-lg transition-colors">
+            Read Integration Guide →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-12 border-t border-white/10">
+      <div class="text-center text-gray-400">
+        <p class="mb-4">Built with 💖 by the Peether Team</p>
+        <div class="flex gap-6 justify-center">
+          <a href="https://ptdt.taxi" class="hover:text-pink-500 transition-colors">Main Website</a>
+          <a href="https://dapp.ptdt.taxi" class="hover:text-pink-500 transition-colors">DApp</a>
+          <a href="https://github.com/pinkpeether" class="hover:text-pink-500 transition-colors">GitHub</a>
+          <a href="https://t.me/PeetherPTDT" class="hover:text-pink-500 transition-colors">Telegram</a>
+        </div>
+        <p class="mt-4 text-sm">© 2026 Pink Taxi Group LTD. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Simple particle animation
+    const particleBg = document.querySelector('.particle-bg');
+    const colors = ['rgba(251, 10, 139, 0.6)', 'rgba(0, 226, 110, 0.6)'];
+    
+    for (let i = 0; i < 30; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.width = Math.random() * 4 + 2 + 'px';
+      particle.style.height = particle.style.width;
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      particle.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      particleBg.appendChild(particle);
+    }
+  </script>
+
+</body>
+</html>

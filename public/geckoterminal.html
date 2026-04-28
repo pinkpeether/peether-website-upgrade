@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTDT on GeckoTerminal | Live On-Chain Market Data | Peether</title>
+    <meta name="description" content="Track PTDT on GeckoTerminal with live price, liquidity, FDV and holders. Gecko purple meets PTDT pink for a clean on-chain market intelligence page.">
+    <link rel="canonical" href="https://ptdt.taxi/geckoterminal.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PTDT on GeckoTerminal | Live On-Chain Market Data">
+    <meta property="og:description" content="Follow PTDT live on GeckoTerminal with real-time BNB Chain market data, pool visibility, and GeckoTerminal API references.">
+    <meta property="og:image" content="https://ptdt.taxi/social-preview.png">
+    <meta property="og:url" content="https://ptdt.taxi/geckoterminal.html">
+    <meta property="og:site_name" content="Peether PTDT">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@PTDT_Token">
+    <meta name="twitter:title" content="PTDT on GeckoTerminal | Live On-Chain Market Data">
+    <meta name="twitter:description" content="Gecko purple meets PTDT pink. Track PTDT live on GeckoTerminal with clean on-chain market visibility.">
+    <meta name="twitter:image" content="https://ptdt.taxi/social-preview.png">
+
+    <link rel="icon" type="image/x-icon" href="/geckoterminal-favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800;900&family=Space+Grotesk:wght@400;500;700&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0a0912;
+            --bg-secondary: #12101d;
+            --bg-card: rgba(20, 17, 33, 0.9);
+            --bg-glass: rgba(18, 16, 29, 0.9);
+            --text-primary: #ecebf7;
+            --text-secondary: #b3abc9;
+            --text-muted: #7f7894;
+            --pink-primary: #fb0b8c;
+            --pink-light: #ff4da6;
+            --gecko-purple: #7c3aed;
+            --gecko-purple-light: #a855f7;
+            --gecko-mint: #86efac;
+            --green-primary: #10b981;
+            --border-color: rgba(255,255,255,0.08);
+            --gradient-ptdt: linear-gradient(135deg, #fb0b8c 0%, #d946ef 42%, #7c3aed 100%);
+            --gradient-gecko: linear-gradient(135deg, #5b21b6 0%, #7c3aed 50%, #a855f7 100%);
+            --shadow-lg: 0 24px 60px rgba(0,0,0,0.38);
+        }
+
+        body.light-mode {
+            --bg-primary: #f6f4fb;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255,255,255,0.92);
+            --bg-glass: rgba(255,255,255,0.88);
+            --text-primary: #1d1731;
+            --text-secondary: #5f5779;
+            --text-muted: #8b86a1;
+            --border-color: rgba(124,58,237,0.12);
+            --shadow-lg: 0 24px 60px rgba(68,49,122,0.12);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Lexend', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        #particleCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at top left, rgba(251,11,140,0.10), transparent 28%),
+                radial-gradient(circle at top right, rgba(124,58,237,0.18), transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(16,185,129,0.08), transparent 26%),
+                var(--bg-primary);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: var(--gradient-ptdt);
+            color: #fff;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+
+        .theme-toggle svg { width: 24px; height: 24px; fill: currentColor; }
+
+        .home-logo-section { text-align: center; padding: 30px 0 14px; }
+        .home-logo-link img { width: 188px; height: auto; transition: transform 0.25s ease; }
+        .home-logo-link:hover img { transform: scale(1.03); }
+
+        .page-nav {
+            background: linear-gradient(135deg, rgba(251,11,140,0.10), rgba(124,58,237,0.18));
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(168,85,247,0.18);
+            border-radius: 16px;
+            padding: 12px 24px;
+            margin: 0 auto;
+            max-width: 980px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: center;
+        }
+        .page-nav::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--pink-primary), var(--gecko-purple-light), var(--pink-primary));
+        }
+        .nav-row { display: flex; gap: 6px; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .nav-divider { width: 80%; max-width: 520px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent); }
+        body.light-mode .nav-divider { background: linear-gradient(90deg, transparent, rgba(60,40,100,0.15), transparent); }
+        .nav-link {
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: .82rem;
+            font-family: 'Fira Code', monospace;
+            letter-spacing: .02em;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            transition: all .25s ease;
+            white-space: nowrap;
+        }
+        .nav-link:hover {
+            background: rgba(251,11,140,0.12);
+            color: #fff;
+            border-color: rgba(251,11,140,0.3);
+        }
+        .nav-link.verified-tab:hover { background: rgba(16,185,129,0.15); }
+        .nav-link.active.gecko-tab {
+            background: linear-gradient(135deg, #7c3aed 0%, #9f67ff 58%, #fb0b8c 100%);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(124,58,237,0.42);
+            font-weight: 700;
+        }
+        .nav-link.pancake-tab:hover { background: rgba(34,211,238,0.15); }
+        .nav-link.grok-tab:hover { background: rgba(168,85,247,0.18); }
+        .nav-sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); }
+        body.light-mode .nav-sep { background: rgba(60,40,100,0.16); }
+
+        .coin-slogan-section { text-align: center; padding: 26px 0 12px; }
+        .coin-wrapper { width: 110px; height: 110px; margin: 0 auto 14px; perspective: 1200px; }
+        .coin {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transform-style: preserve-3d;
+            animation: coinFlip 2.3s cubic-bezier(.25,.1,.25,1) 1 both;
+        }
+        .coin img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transform: translateZ(14px);
+            box-shadow: 0 0 28px rgba(168,85,247,0.36), 0 0 18px rgba(251,11,140,0.22);
+        }
+        .coin::before {
+            content: "";
+            position: absolute;
+            inset: 3px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, #4c1d95, #8b5cf6, #f472b6, #8b5cf6, #4c1d95);
+            transform: translateZ(-14px);
+            filter: blur(1px);
+        }
+        @keyframes coinFlip { from { transform: rotateY(0deg); } to { transform: rotateY(2520deg); } }
+
+        .slogan {
+            display: inline-flex;
+            align-items: center;
+            gap: .28em;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(16px, 3vw, 24px);
+            color: var(--text-secondary);
+        }
+        .slogan .code { font-family: 'Fira Code', monospace; color: var(--pink-light); font-weight: 700; }
+        .slogan .gecko { color: var(--gecko-purple-light); font-weight: 700; }
+
+        .container { max-width: 1180px; margin: 0 auto; padding: 26px 20px 80px; }
+
+        .hero-shell {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 28px;
+            align-items: stretch;
+            margin-bottom: 26px;
+        }
+        .hero-copy, .hero-visual {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-copy {
+            padding: 38px;
+            background:
+                radial-gradient(circle at top left, rgba(251,11,140,0.12), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(124,58,237,0.18), transparent 36%),
+                var(--bg-card);
+        }
+        .hero-copy::before,
+        .hero-visual::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(251,11,140,0.0), rgba(168,85,247,0.95), rgba(251,11,140,0.95), rgba(251,11,140,0.0));
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .32em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+        }
+        .eyebrow::before, .eyebrow::after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .eyebrow::before { background: var(--pink-primary); box-shadow: 0 0 14px rgba(251,11,140,0.4); }
+        .eyebrow::after { background: var(--green-primary); box-shadow: 0 0 14px rgba(16,185,129,0.35); }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.2rem, 4vw, 4.2rem);
+            line-height: .95;
+            letter-spacing: -.05em;
+            margin-bottom: 16px;
+        }
+        .hero-title .pink { color: var(--pink-light); }
+        .hero-title .purple { color: #b794ff; }
+        .hero-title .plain { color: var(--text-primary); }
+
+        .hero-desc {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            max-width: 58ch;
+            margin-bottom: 20px;
+        }
+
+        .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+        .hero-badge {
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-size: .85rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            background: rgba(255,255,255,0.04);
+            color: var(--text-secondary);
+        }
+        .hero-badge.pink { color: #ffc1e0; border-color: rgba(251,11,140,0.28); }
+        .hero-badge.purple { color: #d8c7ff; border-color: rgba(168,85,247,0.30); }
+        .hero-badge.green { color: #baf7cf; border-color: rgba(16,185,129,0.26); }
+
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 20px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+        .cta-btn:hover { transform: translateY(-2px); }
+        .cta-primary {
+            background: var(--gradient-ptdt);
+            color: #fff;
+            box-shadow: 0 14px 28px rgba(124,58,237,0.26);
+        }
+        .cta-secondary {
+            background: rgba(255,255,255,0.04);
+            color: var(--text-primary);
+            border: 1px solid rgba(168,85,247,0.26);
+        }
+
+        .hero-visual {
+            padding: 26px;
+            background:
+                radial-gradient(circle at top right, rgba(124,58,237,0.16), transparent 28%),
+                radial-gradient(circle at bottom left, rgba(251,11,140,0.10), transparent 30%),
+                var(--bg-card);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100%;
+        }
+        .visual-chip {
+            align-self: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.06);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            font-size: .76rem;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        .visual-chip .dot { width: 9px; height: 9px; border-radius: 50%; }
+        .visual-chip .pink { background: var(--pink-primary); }
+        .visual-chip .green { background: var(--green-primary); }
+
+        .visual-button {
+            display: block;
+            width: 100%;
+            max-width: 390px;
+            margin: 0 auto 20px;
+            filter: drop-shadow(0 18px 30px rgba(124,58,237,0.18));
+        }
+        .visual-title {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.7rem, 3vw, 2.8rem);
+            line-height: 1;
+            letter-spacing: -.04em;
+            margin-bottom: 10px;
+        }
+        .visual-sub {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        .mini-stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+        .mini-stat {
+            position: relative;
+            padding: 18px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            text-align: center;
+        }
+        .mini-stat::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.06), transparent 45%);
+            pointer-events: none;
+        }
+        .mini-stat.pink { background: linear-gradient(135deg, #fb0b8c, #ff4da6); }
+        .mini-stat.green { background: linear-gradient(135deg, #047857, #10b981); }
+        .mini-stat.purple { background: linear-gradient(135deg, #6d28d9, #9f67ff); }
+        .mini-stat.dark { background: linear-gradient(135deg, #1f2937, #334155); }
+        .mini-stat .label {
+            font-size: .72rem;
+            text-transform: uppercase;
+            letter-spacing: .28em;
+            color: rgba(255,255,255,0.78);
+            margin-bottom: 10px;
+        }
+        .mini-stat .value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0,1fr));
+            gap: 16px;
+            margin: 0 0 26px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            padding: 22px 18px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+        .stat-card .value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.35rem, 2vw, 2rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-card .label {
+            color: var(--text-secondary);
+            font-size: .88rem;
+        }
+        .value.pink { color: var(--pink-light); }
+        .value.green { color: var(--green-primary); }
+        .value.purple { color: #b794ff; }
+        .value.mint { color: #9fffc6; }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+        .content-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--shadow-lg);
+        }
+        .content-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+        .content-card p {
+            color: var(--text-secondary);
+            font-size: .96rem;
+        }
+        .feature-list {
+            list-style: none;
+            margin-top: 14px;
+            display: grid;
+            gap: 8px;
+        }
+        .feature-list li {
+            color: var(--text-secondary);
+            font-size: .92rem;
+            padding-left: 18px;
+            position: relative;
+        }
+        .feature-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--pink-light);
+        }
+
+        .terminal-shell {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+        .terminal-panel, .api-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+        .terminal-panel { padding: 26px; }
+        .api-panel { padding: 0; }
+        .panel-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+        .panel-copy {
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+        }
+        .terminal-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+        .api-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(135deg, rgba(124,58,237,0.14), rgba(251,11,140,0.10));
+        }
+        .api-header h3 { font-family: 'Montserrat', sans-serif; font-size: 1rem; }
+        .code-block {
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: .82rem;
+            line-height: 1.75;
+            color: #d8d2ef;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        body.light-mode .code-block { color: #433a62; }
+
+        .cta-section {
+            text-align: center;
+            background:
+                radial-gradient(circle at center top, rgba(124,58,237,0.18), transparent 38%),
+                radial-gradient(circle at bottom center, rgba(251,11,140,0.16), transparent 34%),
+                var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            box-shadow: var(--shadow-lg);
+            padding: 34px 24px;
+            margin-bottom: 28px;
+        }
+        .cta-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 3rem);
+            margin-bottom: 10px;
+        }
+        .cta-copy {
+            color: var(--text-secondary);
+            max-width: 58ch;
+            margin: 0 auto 18px;
+        }
+
+        .footer {
+            padding: 18px 0 50px;
+        }
+        .footer-shell {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            padding: 22px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 18px;
+        }
+        .footer-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .footer-links {
+            display: grid;
+            gap: 8px;
+        }
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: .92rem;
+        }
+        .footer-links a:hover { color: var(--pink-light); }
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            margin-top: 18px;
+            padding-top: 14px;
+            color: var(--text-muted);
+            font-size: .88rem;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-shell, .terminal-shell, .content-grid { grid-template-columns: 1fr; }
+            .stats-banner { grid-template-columns: repeat(2, minmax(0,1fr)); }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .page-nav { padding: 12px 14px; }
+            .nav-link { font-size: .74rem; padding: 6px 10px; }
+            .nav-sep { display: none; }
+            .container { padding: 22px 16px 70px; }
+            .hero-copy, .hero-visual, .content-card, .terminal-panel { padding: 22px; }
+            .hero-actions, .terminal-actions { flex-direction: column; }
+            .cta-btn { width: 100%; }
+        }
+
+        @media (max-width: 560px) {
+            .stats-banner, .mini-stats { grid-template-columns: 1fr; }
+            .home-logo-link img { width: 160px; }
+            .coin-wrapper { width: 92px; height: 92px; }
+            .slogan { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+    </button>
+
+    <div class="home-logo-section">
+        <a href="https://ptdt.taxi" class="home-logo-link" title="Go to PTDT Homepage">
+            <img src="ptdt-main-new-logo.png" alt="PTDT Home">
+        </a>
+    </div>
+
+    <nav class="page-nav">
+        <div class="nav-row">
+            <a href="/ptdt-docs/mainguide.html" class="nav-link">Main-Guide</a>
+            <span class="nav-sep"></span>
+            <a href="/ptdt-docs/apidocs.html" class="nav-link">API-Docs</a>
+            <span class="nav-sep"></span>
+            <a href="/ptdt-docs/dashboard.html" class="nav-link">Dashboard</a>
+            <span class="nav-sep"></span>
+            <a href="https://whitepaper.ptdt.taxi/" class="nav-link">WhitePaper</a>
+            <span class="nav-sep"></span>
+            <a href="/ptdt-docs/verified.html" class="nav-link verified-tab">Verified ✓</a>
+            <span class="nav-sep"></span>
+            <a href="/ptdt-docs/rebuttal.html" class="nav-link">Rebuttal</a>
+            <span class="nav-sep"></span>
+            <a href="/scope.html" class="nav-link">Scope</a>
+            <span class="nav-sep"></span>
+            <a href="/stake.html" class="nav-link">⚡ Staking</a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-row">
+            <a href="/buy.html" class="nav-link">🏦 Buy PTDT</a>
+            <span class="nav-sep"></span>
+            <a href="/geckoterminal.html" class="nav-link active gecko-tab">🦎 GeckoTerminal</a>
+            <span class="nav-sep"></span>
+            <a href="/pancakeswap.html" class="nav-link pancake-tab">🥞 PancakeSwap</a>
+            <span class="nav-sep"></span>
+            <a href="/github.html" class="nav-link">💻 GitHub</a>
+            <span class="nav-sep"></span>
+            <a href="/grokfare.html" class="nav-link grok-tab">🤖 Grok Fare</a>
+            <span class="nav-sep"></span>
+            <a href="https://ptdt.taxi/grok-stake-sim.html" class="nav-link grok-tab">🧮 Stake Sim</a>
+            <span class="nav-sep"></span>
+            <a href="/ptdt-docs/downloads.html" class="nav-link">📥 Downloads</a>
+        </div>
+    </nav>
+
+    <div class="coin-slogan-section">
+        <div class="coin-wrapper">
+            <div class="coin">
+                <img src="ptdtlogo.png" alt="PTDT Coin" draggable="false">
+            </div>
+        </div>
+        <div class="slogan">
+            <span>Trust the</span>
+            <span class="code">{Code}</span>
+            <span>,</span>
+            <span class="gecko">// Track the Market</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="hero-shell">
+            <div class="hero-copy">
+                <div class="eyebrow">Live Market Intel</div>
+                <h1 class="hero-title">
+                    <span class="pink">PTDT</span>
+                    <span class="plain"> on </span>
+                    <span class="purple">GeckoTerminal</span>
+                </h1>
+                <p class="hero-desc">
+                    GeckoTerminal makes PTDT’s on-chain market footprint visible in real time. Price, liquidity, FDV, holders and live pool context all sit in one place, anchored to the actual BNB Chain pool.
+                </p>
+                <div class="hero-badges">
+                    <span class="hero-badge purple">Gecko Purple</span>
+                    <span class="hero-badge pink">PTDT Pink</span>
+                    <span class="hero-badge green">BNB Chain Pool</span>
+                </div>
+                <div class="hero-actions">
+                    <a class="cta-btn cta-primary" href="https://www.geckoterminal.com/bsc/pools/0xf3a06e9dc5d89b2fd8d7d30946c9aeddc5e01e28" target="_blank" rel="noopener noreferrer">Open GeckoTerminal</a>
+                    <a class="cta-btn cta-secondary" href="https://apiguide.geckoterminal.com/" target="_blank" rel="noopener noreferrer">Gecko API Guide</a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="visual-chip">
+                    <span class="dot pink"></span>
+                    LIVE MARKET
+                    <span class="dot green"></span>
+                </div>
+                <img class="visual-button" src="gterminal_button.png" alt="GeckoTerminal button">
+                <h2 class="visual-title">PTDT / USDT</h2>
+                <p class="visual-sub">PancakeSwap V2 | BNB Smart Chain</p>
+                <div class="mini-stats">
+                    <div class="mini-stat pink">
+                        <div class="label">Price</div>
+                        <div class="value" id="heroPrice">--</div>
+                    </div>
+                    <div class="mini-stat green">
+                        <div class="label">Liquidity</div>
+                        <div class="value" id="heroLiquidity">--</div>
+                    </div>
+                    <div class="mini-stat purple">
+                        <div class="label">FDV</div>
+                        <div class="value" id="heroFdv">--</div>
+                    </div>
+                    <div class="mini-stat dark">
+                        <div class="label">Holders</div>
+                        <div class="value" id="heroHolders">--</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-banner">
+            <div class="stat-card">
+                <div class="value pink" id="statPrice">--</div>
+                <div class="label">PTDT Price</div>
+            </div>
+            <div class="stat-card">
+                <div class="value green" id="statLiquidity">--</div>
+                <div class="label">Liquidity</div>
+            </div>
+            <div class="stat-card">
+                <div class="value purple" id="statFdv">--</div>
+                <div class="label">Fully Diluted Value</div>
+            </div>
+            <div class="stat-card">
+                <div class="value mint" id="statHolders">--</div>
+                <div class="label">Holders</div>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <div class="content-card">
+                <h3>Why GeckoTerminal Matters</h3>
+                <p>
+                    GeckoTerminal gives PTDT a clean public market surface where users can independently inspect the live pool rather than rely on screenshots, claims or stale token pages.
+                </p>
+                <ul class="feature-list">
+                    <li>Live on-chain price visibility</li>
+                    <li>Public liquidity verification</li>
+                    <li>Pool-level credibility for PTDT</li>
+                </ul>
+            </div>
+            <div class="content-card">
+                <h3>Pair-Level Transparency</h3>
+                <p>
+                    PTDT’s BNB Chain pool becomes easy to inspect for researchers, buyers, auditors, communities and listing reviewers looking for a real market footprint.
+                </p>
+                <ul class="feature-list">
+                    <li>PTDT / USDT context in one place</li>
+                    <li>Direct route to PancakeSwap V2 liquidity</li>
+                    <li>Natural bridge between docs and market</li>
+                </ul>
+            </div>
+            <div class="content-card">
+                <h3>API + Site Utility</h3>
+                <p>
+                    GeckoTerminal is more than a listing page. Its API can feed PTDT’s website, dashboard, widgets, analytics, Telegram experiences and more.
+                </p>
+                <ul class="feature-list">
+                    <li>Token and pool endpoints</li>
+                    <li>OHLCV chart data support</li>
+                    <li>Embeddable market-facing proof</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="terminal-shell">
+            <div class="terminal-panel">
+                <h3 class="panel-title">Where This Page Fits</h3>
+                <p class="panel-copy">
+                    This page acts as PTDT’s dedicated GeckoTerminal gateway. It belongs beside pages like Buy, PancakeSwap and GitHub because it serves a separate market-discovery role: proof of live on-chain visibility.
+                </p>
+                <div class="terminal-actions">
+                    <a class="cta-btn cta-primary" href="https://www.geckoterminal.com/bsc/pools/0xf3a06e9dc5d89b2fd8d7d30946c9aeddc5e01e28" target="_blank" rel="noopener noreferrer">Track PTDT on GeckoTerminal</a>
+                    <a class="cta-btn cta-secondary" href="https://pancakeswap.finance/swap?outputCurrency=0x66c6Fc5E7F99272134a52DF9E88D94eD83E89278" target="_blank" rel="noopener noreferrer">Open PancakeSwap</a>
+                </div>
+            </div>
+            <div class="api-panel">
+                <div class="api-header">
+                    <h3>PTDT GeckoTerminal Endpoints</h3>
+                </div>
+                <div class="code-block">Pool API:
+https://api.geckoterminal.com/api/v2/networks/bsc/pools/0xf3a06e9dc5d89b2fd8d7d30946c9aeddc5e01e28
+
+Token Info API:
+https://api.geckoterminal.com/api/v2/networks/bsc/tokens/0x66c6Fc5E7F99272134a52DF9E88D94eD83E89278/info
+
+Live Pool:
+https://www.geckoterminal.com/bsc/pools/0xf3a06e9dc5d89b2fd8d7d30946c9aeddc5e01e28</div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h3 class="cta-title">On-Chain Data Meets PTDT Infrastructure</h3>
+            <p class="cta-copy">
+                PTDT’s deflationary ride-hailing settlement layer is already visible where market participants look for real proof. GeckoTerminal turns that visibility into a shareable public entry point.
+            </p>
+            <div class="hero-actions" style="justify-content:center;">
+                <a class="cta-btn cta-primary" href="https://www.geckoterminal.com/bsc/pools/0xf3a06e9dc5d89b2fd8d7d30946c9aeddc5e01e28" target="_blank" rel="noopener noreferrer">View PTDT Pool</a>
+                <a class="cta-btn cta-secondary" href="/buy.html">Back to Buy PTDT</a>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-shell">
+                <div class="footer-grid">
+                    <div class="footer-card">
+                        <h4>Quick Links</h4>
+                        <div class="footer-links">
+                            <a href="https://ptdt.taxi">🏠 Main Website</a>
+                            <a href="https://dapp.ptdt.taxi">📱 DApp Portal</a>
+                            <a href="/ptdt-docs/dashboard.html">📊 Live Dashboard</a>
+                            <a href="/ptdt-docs/apidocs.html">🔧 API Docs</a>
+                        </div>
+                    </div>
+                    <div class="footer-card">
+                        <h4>Market Links</h4>
+                        <div class="footer-links">
+                            <a href="https://www.geckoterminal.com/bsc/pools/0xf3a06e9dc5d89b2fd8d7d30946c9aeddc5e01e28" target="_blank">🦎 GeckoTerminal Pool</a>
+                            <a href="https://dexscreener.com/bsc/0xF3a06E9Dc5d89B2fD8d7d30946c9aeddc5e01E28" target="_blank">📈 DexScreener</a>
+                            <a href="https://pancakeswap.finance/swap?outputCurrency=0x66c6Fc5E7F99272134a52DF9E88D94eD83E89278" target="_blank">🥞 PancakeSwap</a>
+                            <a href="https://github.com/pinkpeether/peether-protocol" target="_blank">💻 GitHub Repo</a>
+                        </div>
+                    </div>
+                    <div class="footer-card">
+                        <h4>Connect</h4>
+                        <div class="footer-links">
+                            <a href="https://t.me/PeetherPTDT" target="_blank">✈️ Telegram</a>
+                            <a href="https://x.com/PTDT_Token" target="_blank">𝕏 X / Twitter</a>
+                            <a href="https://discord.gg/UKDBwm8x" target="_blank">💬 Discord</a>
+                            <a href="mailto:token@ptdt.taxi">📧 token@ptdt.taxi</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    Copyright © 2026 Peether PTDT. Gecko purple meets PTDT pink for a cleaner market-discovery layer.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const POOL_API = "https://api.geckoterminal.com/api/v2/networks/bsc/pools/0xf3a06e9dc5d89b2fd8d7d30946c9aeddc5e01e28";
+        const TOKEN_INFO_API = "https://api.geckoterminal.com/api/v2/networks/bsc/tokens/0x66c6Fc5E7F99272134a52DF9E88D94eD83E89278/info";
+
+        const formatUsd = (value) => {
+            const number = Number(value);
+            if (!Number.isFinite(number)) return "--";
+            if (number >= 1) {
+                return `$${number.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            }
+            return `$${number.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 6 })}`;
+        };
+
+        const compactNumber = (value) => {
+            const number = Number(value);
+            if (!Number.isFinite(number)) return "--";
+            return new Intl.NumberFormat("en-US", {
+                notation: "compact",
+                maximumFractionDigits: number >= 1000 ? 1 : 2,
+            }).format(number);
+        };
+
+        async function loadMarketData() {
+            try {
+                const [poolResponse, tokenResponse] = await Promise.all([
+                    fetch(POOL_API),
+                    fetch(TOKEN_INFO_API)
+                ]);
+                if (!poolResponse.ok || !tokenResponse.ok) throw new Error("Failed to fetch Gecko data");
+
+                const poolJson = await poolResponse.json();
+                const tokenJson = await tokenResponse.json();
+                const pool = poolJson?.data?.attributes;
+                const token = tokenJson?.data?.attributes;
+                if (!pool || !token) throw new Error("Incomplete data");
+
+                const price = formatUsd(pool.base_token_price_usd);
+                const liquidity = formatUsd(pool.reserve_in_usd);
+                const fdv = formatUsd(pool.fdv_usd);
+                const holders = compactNumber(token.holders?.count);
+
+                document.getElementById("heroPrice").textContent = price;
+                document.getElementById("heroLiquidity").textContent = liquidity;
+                document.getElementById("heroFdv").textContent = fdv;
+                document.getElementById("heroHolders").textContent = holders;
+
+                document.getElementById("statPrice").textContent = price;
+                document.getElementById("statLiquidity").textContent = liquidity;
+                document.getElementById("statFdv").textContent = fdv;
+                document.getElementById("statHolders").textContent = holders;
+            } catch (error) {
+                console.error("GeckoTerminal page data error:", error);
+            }
+        }
+
+        loadMarketData();
+        setInterval(loadMarketData, 60000);
+
+        const themeToggle = document.getElementById("themeToggle");
+        const themeIcon = document.getElementById("themeIcon");
+        const prefersLight = localStorage.getItem("ptdt-theme") === "light";
+        if (prefersLight) document.body.classList.add("light-mode");
+
+        function refreshThemeIcon() {
+            const light = document.body.classList.contains("light-mode");
+            themeIcon.innerHTML = light
+                ? "<path d='M12 2l2.4 4.86L20 9.2l-4 3.9.94 5.5L12 16.8 7.06 18.6 8 13.1 4 9.2l5.6-.34L12 2z'/>"
+                : "<path d='M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z'/>";
+        }
+        refreshThemeIcon();
+
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("light-mode");
+            localStorage.setItem("ptdt-theme", document.body.classList.contains("light-mode") ? "light" : "dark");
+            refreshThemeIcon();
+        });
+
+        const canvas = document.getElementById("particleCanvas");
+        const ctx = canvas.getContext("2d");
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function initParticles() {
+            particles = Array.from({ length: Math.min(52, Math.floor(window.innerWidth / 24)) }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.8 + 0.7,
+                dx: (Math.random() - 0.5) * 0.35,
+                dy: (Math.random() - 0.5) * 0.35,
+                color: Math.random() > 0.5 ? "rgba(251,11,140,0.35)" : "rgba(168,85,247,0.35)"
+            }));
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p) => {
+                p.x += p.dx;
+                p.y += p.dy;
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        resizeCanvas();
+        initParticles();
+        animateParticles();
+        window.addEventListener("resize", () => {
+            resizeCanvas();
+            initParticles();
+        });
+    </script>
+</body>
+</html>
